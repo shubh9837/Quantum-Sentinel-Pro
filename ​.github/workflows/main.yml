@@ -1,0 +1,38 @@
+name: Quantum-Sentinel-Automation
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: 'Choose Task'
+        required: true
+        default: 'download'
+        type: choice
+        options:
+          - enrich
+          - download
+
+jobs:
+  run-task:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - run: pip install pandas yfinance pyarrow fastparquet requests
+      
+      - name: Run Task
+        run: |
+          if [ "${{ github.event.inputs.task }}" == "enrich" ]; then
+            python enrich_tickers.py
+          else
+            python downloader.py
+          fi
+          
+      - name: Save Changes
+        run: |
+          git config --global user.name "Bot"
+          git config --global user.email "bot@github.com"
+          git add .
+          git commit -m "Update Data" || exit 0
+          git push
