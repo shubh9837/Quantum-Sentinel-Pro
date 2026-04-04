@@ -1,5 +1,7 @@
 name: Quantum-Sentinel-Automation
 on:
+  schedule:
+    - cron: '30 0 * * 2-6' # Runs at 6:00 AM IST, Tuesday to Saturday
   workflow_dispatch:
     inputs:
       task:
@@ -34,5 +36,5 @@ jobs:
           git config --global user.name "Bot"
           git config --global user.email "bot@github.com"
           git add .
-          git commit -m "Update Data" || exit 0
+          git commit -m "Update Market Data" || exit 0
           git push
