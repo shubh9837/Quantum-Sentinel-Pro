@@ -1,0 +1,7 @@
+streamlit
+pandas
+yfinance
+pyarrow
+fastparquet
+requests
+
