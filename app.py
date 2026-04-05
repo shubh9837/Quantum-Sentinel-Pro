@@ -15,83 +15,132 @@ def load_all():
 data, meta = load_all()
 
 if data is None:
-    st.error("Data missing. Please run Downloader in GitHub.")
+    st.error("Data missing. Please run the 'download' task in GitHub Actions.")
     st.stop()
 
-# Helper to fix symbols for mapping
+# Helper to fix symbols
 def clean_sym(s): return s.replace(".NS", "").replace("_", "&")
 
 close_prices = data['Close']
 volumes = data['Volume']
 
-# --- SIDEBAR: RISK & SECTOR ---
-ema50_market = close_prices.ewm(span=50).mean()
-breadth = (close_prices.iloc[-1] > ema50_market.iloc[-1]).mean() * 100
-market_bonus = 1 if breadth > 50 else (-2 if breadth < 30 else 0)
+# --- 1. SECTOR & MARKET ANALYSIS (Sidebar) ---
+st.sidebar.title("🛡️ Market Intelligence")
 
-st.sidebar.title("🛡️ Market Risk")
-if breadth > 50: st.sidebar.success(f"🟢 BULLISH: {breadth:.1f}%")
-else: st.sidebar.error(f"🔴 BEARISH: {breadth:.1f}%")
+# Market Breadth (Nifty 500 vs 50 EMA)
+ema50_m = close_prices.ewm(span=50).mean()
+breadth = (close_prices.iloc[-1] > ema50_m.iloc[-1]).mean() * 100
+market_bias = 1 if breadth > 50 else (-2 if breadth < 30 else 0)
 
-# --- ENGINE ---
-st.title("🎯 Quantum-Sentinel: Pro Scanner")
+if breadth > 50: st.sidebar.success(f"🟢 MARKET: BULLISH ({breadth:.1f}%)")
+else: st.sidebar.error(f"🔴 MARKET: BEARISH ({breadth:.1f}%)")
 
-if st.button("🚀 Run Full Market Scan"):
+# Sector Sentiment Engine
+st.sidebar.markdown("---")
+st.sidebar.subheader("🔥 Top 3 Trending Sectors")
+sector_rets = {}
+for ticker in close_prices.columns:
+    if ticker == "^NSEI": continue
+    try:
+        clean = clean_sym(ticker)
+        sec = meta.loc[meta['SYMBOL'] == clean, 'SECTOR'].values[0]
+        ret = (close_prices[ticker].iloc[-1] - close_prices[ticker].iloc[-20]) / close_prices[ticker].iloc[-20]
+        if sec not in sector_rets: sector_rets[sec] = []
+        sector_rets[sec].append(ret)
+    except: continue
+
+avg_sec_ret = {k: np.mean(v) for k, v in sector_rets.items()}
+top_sectors = sorted(avg_sec_ret, key=avg_sec_ret.get, reverse=True)[:3]
+for s in top_sectors: st.sidebar.markdown(f"**- {s}**")
+
+# --- 2. PREDICTION ENGINE ---
+st.title("🎯 Quantum-Sentinel: 30-Day Pro Predictor")
+st.caption("Predicting Directional Movement and Expected Volatility for 2,200+ Stocks.")
+
+if st.button("🚀 Run Institutional Prediction Scan"):
     results = []
     nifty = close_prices['^NSEI'].dropna()
-    nifty_ret = (nifty.iloc[-1] - nifty.iloc[-60])/nifty.iloc[-60] if len(nifty)>60 else 0
+    n_ret = (nifty.iloc[-1] - nifty.iloc[-60])/nifty.iloc[-60] if len(nifty)>60 else 0
 
-    progress = st.progress(0)
-    cols = close_prices.columns
-    for i, ticker in enumerate(cols):
-        if ticker == "^NSEI": continue
+    prog = st.progress(0)
+    all_ticks = close_prices.columns
+    
+    for i, t in enumerate(all_ticks):
+        if t == "^NSEI": continue
         try:
-            s_data = close_prices[ticker].dropna()
-            if s_data.empty: continue
+            s_data = close_prices[t].dropna()
+            v_data = volumes[t].dropna()
+            if len(s_data) < 40: continue
             
             curr = s_data.iloc[-1]
-            ema20 = s_data.ewm(span=20).mean().iloc[-1]
-            ema50_v = s_data.ewm(span=50).mean().iloc[-1]
+            e20 = s_data.ewm(span=20).mean().iloc[-1]
+            e50 = s_data.ewm(span=50).mean().iloc[-1]
             
-            # Simple RSI
-            delta = s_data.diff()
-            gain = delta.where(delta > 0, 0).rolling(14).mean().iloc[-1]
-            loss = -delta.where(delta < 0, 0).rolling(14).mean().iloc[-1]
-            rsi = 100 - (100/(1 + gain/loss)) if loss > 0 else 50
+            # Momentum (RSI)
+            diff = s_data.diff()
+            g = diff.where(diff > 0, 0).rolling(14).mean().iloc[-1]
+            l = -diff.where(diff < 0, 0).rolling(14).mean().iloc[-1]
+            rsi = 100 - (100/(1 + g/l)) if l > 0 else 50
             
-            # Scoring (0-10)
-            score = 4 + market_bonus
-            if curr > ema20: score += 1
-            if ema20 > ema50_v: score += 2
-            if rsi > 50: score += 1
-            if (curr - s_data.iloc[-20])/s_data.iloc[-20] > nifty_ret: score += 2
+            # Volatility (Expected Move)
+            # Use 20-day Std Dev to predict the 30-day "swing range"
+            daily_std = s_data.pct_change().std()
+            expected_move_pct = daily_std * np.sqrt(20) * 100 # 20 trading days in a month
+            
+            # Scoring Logic (0-10)
+            score = 4 + market_bias
+            if curr > e20: score += 1
+            if e20 > e50: score += 1
+            if rsi > 55: score += 1
+            if rsi > 70: score -= 1 # Penalty for overbought
+            if v_data.iloc[-1] > v_data.rolling(20).mean().iloc[-1] * 1.5: score += 2 # Volume Surge
+            
+            clean_t = clean_sym(t)
+            sec = meta.loc[meta['SYMBOL'] == clean_t, 'SECTOR'].values[0] if clean_t in meta['SYMBOL'].values else "Other"
+            if sec in top_sectors: score += 1
             
             score = max(0, min(10, int(score)))
-            
+
+            # Directional Prediction
+            if score >= 7: direction = "⬆️ BULLISH"
+            elif score <= 3: direction = "⬇️ BEARISH"
+            else: direction = "↔️ SIDEWAYS"
+
             results.append({
-                "Stock": clean_sym(ticker),
+                "Stock": clean_t,
                 "Score": score,
+                "Direction": direction,
                 "Price": round(float(curr), 1),
-                "Target": round(float(curr * 1.15), 1),
-                "StopLoss": round(float(curr * 0.93), 1),
-                "Upside%": "15.0%",
+                "Exp. Move (%)": f"±{round(float(expected_move_pct), 1)}%",
+                "Target (High)": round(float(curr * (1 + expected_move_pct/100)), 1),
+                "Target (Low)": round(float(curr * (1 - expected_move_pct/100)), 1),
                 "RSI": round(float(rsi), 1),
-                "Verdict": "🔥 BUY" if score >= 8 else ("✅ HOLD" if score >= 5 else "❌ AVOID")
+                "Sector": sec
             })
         except: continue
-        if i % 100 == 0: progress.progress(i/len(cols))
+        if i % 100 == 0: prog.progress(i/len(all_ticks))
     
-    st.session_state['results'] = pd.DataFrame(results).sort_values(by="Score", ascending=False)
-    progress.empty()
+    st.session_state['res'] = pd.DataFrame(results).sort_values(by="Score", ascending=False)
+    prog.empty()
 
-# --- DISPLAY & SEARCH ---
-if 'results' in st.session_state:
-    df = st.session_state['results']
+# --- 3. SEARCH & RESULTS ---
+if 'res' in st.session_state:
+    df = st.session_state['res']
     
-    search = st.text_input("🔍 Search Stock Symbol (e.g. RELIANCE)").upper()
+    search = st.text_input("🔍 Check Specific Stock Prediction").upper()
     if search:
-        res = df[df['Stock'].str.contains(search)]
-        st.table(res)
+        s_res = df[df['Stock'].str.contains(search)]
+        if not s_res.empty:
+            st.write(f"### Prediction for {search}")
+            st.dataframe(s_res, hide_index=True)
+        else: st.warning("Stock not found.")
+
+    st.subheader("📊 Full Market Prediction Rankings")
     
-    st.subheader("📊 All Ranked Stocks")
-    st.dataframe(df, use_container_width=True, hide_index=True)
+    # Apply styling
+    def color_dir(val):
+        if "BULLISH" in str(val): return 'color: #00ff00; font-weight: bold'
+        if "BEARISH" in str(val): return 'color: #ff4b4b; font-weight: bold'
+        return ''
+
+    st.dataframe(df.style.map(color_dir, subset=['Direction']), use_container_width=True, hide_index=True)
