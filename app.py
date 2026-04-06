@@ -146,5 +146,81 @@ with tab1:
 # --- TAB 2: MY PORTFOLIO ---
 with tab2:
     if 'portfolio' not in st.session_state: 
-        st.session_state['portfolio'] = load
+        st.session_state['portfolio'] = load_portfolio()
+    
+    with st.expander("➕ Add / Edit Position", expanded=False):
+        with st.form("p_form"):
+            all_syms = sorted(meta['SYMBOL'].astype(str).unique().tolist())
+            s_sym = st.selectbox("Select Stock", [""] + all_syms)
+            ex = st.session_state['portfolio'].get(s_sym, {"price": 0.0, "qty": 0})
+            c1, c2 = st.columns(2)
+            s_p = c1.number_input("Avg Buy Price", value=float(ex['price']))
+            s_q = c2.number_input("Quantity", value=int(ex['qty']), min_value=0)
+            if st.form_submit_button("Save Position"):
+                if s_sym:
+                    if s_q == 0: st.session_state['portfolio'].pop(s_sym, None)
+                    else: st.session_state['portfolio'][s_sym] = {"price": s_p, "qty": s_q}
+                    save_portfolio(st.session_state['portfolio'])
+                    st.rerun()
+
+    if st.session_state['portfolio']:
+        p_list, a_sell, a_add = [], [], []
+        m_df = st.session_state.get('raw_results', pd.DataFrame())
+
+        for sym, d in st.session_state['portfolio'].items():
+            inv = d['price'] * d['qty']
+            row = {"Stock": sym, "Avg Price": round(d['price'], 1), "Qty": d['qty'], "Invested": round(inv, 1)}
+            
+            if not m_df.empty and sym in m_df['Stock'].values:
+                live = m_df[m_df['Stock'] == sym].iloc[0]
+                cp = float(live['Current Price'])
+                val = cp * d['qty']
+                pnl = val - inv
+                p_pct = (pnl / inv * 100) if inv > 0 else 0
+                t_price = live['Target']
+                t_increase = round(((t_price - cp) / cp * 100), 1) if cp > 0 else 0
+
+                if p_pct <= -7.0 or int(live['Rating']) <= 3: 
+                    v, a_sell = "🔴 SELL", a_sell + [sym]
+                elif int(live['Rating']) >= 8: 
+                    v, a_add = "🔵 BUY/ADD", a_add + [sym]
+                else: v = "🟡 HOLD"
+
+                row.update({
+                    "Current Price": cp, "Current Value": round(val, 1),
+                    "Unrealised Profit": round(pnl, 1), "Profit %": round(p_pct, 1),
+                    "Target Price": t_price, "Target Addl. %": t_increase, "Verdict": v
+                })
+            else:
+                row.update({k: 0.0 for k in ["Current Price", "Current Value", "Unrealised Profit", "Profit %", "Target Price", "Target Addl. %"]})
+                row.update({"Verdict": "Scan Market First"})
+            p_list.append(row)
+
+        df_p = pd.DataFrame(p_list)
+        if not df_p.empty and "Current Value" in df_p.columns:
+            total_inv = df_p["Invested"].sum()
+            total_pnl = df_p["Unrealised Profit"].sum()
+            total_row = pd.DataFrame([{
+                "Stock": "TOTAL", "Invested": round(total_inv, 1), 
+                "Current Value": round(df_p["Current Value"].sum(), 1), 
+                "Unrealised Profit": round(total_pnl, 1), 
+                "Profit %": round((total_pnl/total_inv*100),1) if total_inv > 0 else 0
+            }])
+            df_p = pd.concat([df_p, total_row], ignore_index=True).fillna("-")
+
+        st.dataframe(df_p, use_container_width=True, hide_index=True)
         
+        st.subheader("📝 Trading Session Actionables")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.info("**Portfolio Risk Management**")
+            if a_sell: st.error(f"⚠️ **EXIT:** {', '.join(a_sell)}")
+            if a_add: st.success(f"💎 **ADD:** {', '.join(a_add)}")
+            if not a_sell and not a_add: st.write("Portfolio remains technically sound.")
+        with col2:
+            st.success("**New Market Opportunities**")
+            if not m_df.empty:
+                top = m_df[~m_df['Stock'].isin(st.session_state['portfolio'].keys())].head(3)
+                for _, r in top.iterrows(): 
+                    st.write(f"🚀 **{r['Stock']}** (Target: {r['Target']} | {r['Upside %']}% Potential)")
+                    
