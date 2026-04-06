@@ -6,16 +6,19 @@ import os
 
 st.set_page_config(page_title="Quantum-Sentinel Pro", layout="wide")
 
-# --- PORTFOLIO STORAGE FILE ---
+# --- PORTFOLIO STORAGE (Upgraded for Price/Qty) ---
 PORTFOLIO_FILE = "portfolio.json"
 
 def load_portfolio():
     if os.path.exists(PORTFOLIO_FILE):
         try:
             with open(PORTFOLIO_FILE, "r") as f:
-                return json.load(f)
-        except: return []
-    return []
+                data = json.load(f)
+                # Migration check: If old flat list, convert to empty dict
+                if isinstance(data, list): return {}
+                return data
+        except: return {}
+    return {}
 
 def save_portfolio(portfolio):
     with open(PORTFOLIO_FILE, "w") as f:
@@ -40,8 +43,8 @@ def clean_sym(s): return s.replace(".NS", "").replace("_", "&")
 close_prices = data['Close']
 volumes = data['Volume']
 
-# --- 1. BENCHMARK & SECTOR ANALYSIS (Sidebar) ---
-st.sidebar.title("🛡️ Institutional Intelligence")
+# --- 1. BENCHMARK & SECTOR ANALYSIS ---
+st.sidebar.title("🛡️ Market Intelligence")
 
 nifty_symbol = "^NSEI"
 if nifty_symbol in close_prices.columns:
@@ -56,9 +59,7 @@ if nifty_symbol in close_prices.columns:
         st.sidebar.error(f"🔴 NIFTY 50: Below 50-EMA (Bearish)")
         nifty_bias = -2
 else:
-    nifty_bias = 0
-    nifty_curr = 1
-    nifty_close = pd.Series([1]*60)
+    nifty_bias, nifty_curr, nifty_close = 0, 1, pd.Series([1]*60)
 
 sector_rets = {}
 for ticker in close_prices.columns:
@@ -78,14 +79,12 @@ st.sidebar.markdown("---")
 st.sidebar.subheader("🔥 Top 3 Sectors")
 for s in top_sectors: st.sidebar.markdown(f"**- {s}**")
 
-# --- INITIALIZE TABS ---
+
 st.title("🎯 Quantum-Sentinel: Pro Predictor")
 tab1, tab2 = st.tabs(["📊 Market Screener", "💼 My Portfolio"])
 
 # --- TAB 1: MARKET SCREENER ---
 with tab1:
-    st.caption("Benchmark-aware scoring with 15-30 day directional forecasting.")
-
     if st.button("🚀 Run Institutional Prediction Scan"):
         results = []
         nifty_60d_ret = (nifty_curr - nifty_close.iloc[-60]) / nifty_close.iloc[-60]
@@ -113,7 +112,6 @@ with tab1:
                 
                 expected_vol = s_data.pct_change().std() * np.sqrt(20) * 100
                 
-                # 0-10 SCORING LOGIC
                 score = 4 + nifty_bias
                 if curr > e20: score += 1
                 if e20 > e50: score += 1
@@ -126,11 +124,9 @@ with tab1:
                 results.append({
                     "Stock": clean_sym(t),
                     "Score": score,
-                    "Prediction": "⬆️ BULLISH" if score >= 7 else ("⬇️ BEARISH" if score <= 3 else "↔️ NEUTRAL"),
                     "Price": round(float(curr), 1),
                     "Exp. Move": f"±{round(float(expected_vol), 1)}%",
-                    "30D High Target": round(float(curr * (1 + expected_vol/100)), 1),
-                    "30D Low Target": round(float(curr * (1 - expected_vol/100)), 1),
+                    "Target": round(float(curr * (1 + expected_vol/100)), 1),
                     "RSI": round(float(rsi), 1)
                 })
             except: continue
@@ -141,61 +137,56 @@ with tab1:
 
     if 'res' in st.session_state:
         df = st.session_state['res']
-        
-        search = st.text_input("🔍 Search Stock Detail (e.g. INFOSYS)").upper()
-        if search:
-            st.table(df[df['Stock'].str.contains(search)])
-
-        st.subheader("📊 Ranked Market Predictions")
         st.dataframe(df, use_container_width=True, hide_index=True)
 
-# --- TAB 2: MY PORTFOLIO ---
+
+# --- TAB 2: MY PORTFOLIO (The Upgrade) ---
 with tab2:
-    st.subheader("💼 Active Portfolio Monitor")
-    
-    # Load session state portfolio
     if 'portfolio' not in st.session_state:
         st.session_state['portfolio'] = load_portfolio()
         
-    col1, col2 = st.columns(2)
+    st.subheader("💼 Portfolio Command Center")
+    
+    # 1. ADD / REMOVE FORM
+    col1, col2 = st.columns([2, 1])
+    
     with col1:
-        new_stock = st.text_input("Add Stock Symbol (e.g. RELIANCE)").upper().strip()
-        if st.button("➕ Add to Portfolio"):
-            if new_stock and new_stock not in st.session_state['portfolio']:
-                st.session_state['portfolio'].append(new_stock)
+        with st.form("add_stock_form"):
+            st.write("**Add / Update Position**")
+            # Dropdown with autocomplete from your master list
+            all_symbols = [""] + sorted(meta['SYMBOL'].astype(str).tolist())
+            selected_sym = st.selectbox("Select Stock Symbol", all_symbols)
+            
+            c_price, c_qty = st.columns(2)
+            buy_price = c_price.number_input("Average Buy Price (₹)", min_value=0.0, format="%.1f")
+            qty = c_qty.number_input("Quantity", min_value=1, step=1)
+            
+            submit = st.form_submit_button("➕ Save to Portfolio")
+            if submit and selected_sym:
+                st.session_state['portfolio'][selected_sym] = {"price": buy_price, "qty": qty}
                 save_portfolio(st.session_state['portfolio'])
-                st.success(f"Added {new_stock} to your portfolio.")
+                st.success(f"Saved {selected_sym}!")
                 st.rerun()
-                
+
     with col2:
-        remove_stock = st.selectbox("Remove Stock", [""] + st.session_state['portfolio'])
-        if st.button("🗑️ Remove"):
-            if remove_stock in st.session_state['portfolio']:
-                st.session_state['portfolio'].remove(remove_stock)
+        st.write("**Remove Position**")
+        current_holdings = [""] + list(st.session_state['portfolio'].keys())
+        remove_sym = st.selectbox("Select to Remove", current_holdings)
+        if st.button("🗑️ Delete"):
+            if remove_sym in st.session_state['portfolio']:
+                del st.session_state['portfolio'][remove_sym]
                 save_portfolio(st.session_state['portfolio'])
-                st.warning(f"Removed {remove_stock} from your portfolio.")
+                st.warning(f"Deleted {remove_sym}.")
                 st.rerun()
 
     st.markdown("---")
-    
+
+    # 2. PORTFOLIO ANALYSIS DASHBOARD
     if st.session_state['portfolio']:
         if 'res' in st.session_state:
-            df = st.session_state['res']
-            # Filter main results for only the stocks in the portfolio
-            port_df = df[df['Stock'].isin(st.session_state['portfolio'])].copy()
+            port_data = []
+            total_invested = 0
+            total_current = 0
             
-            def get_action(score):
-                if score >= 7: return "🟢 ADD MORE (BUY)"
-                elif score >= 4: return "🟡 HOLD TIGHT"
-                else: return "🔴 SELL / TRIM RISK"
+            main_df = st.session_state['res']
                 
-            if not port_df.empty:
-                port_df.insert(2, 'Action Required', port_df['Score'].apply(get_action))
-                st.dataframe(port_df, use_container_width=True, hide_index=True)
-            else:
-                st.warning("Ensure the symbols you added match the exact NSE tickers (e.g., INFY, TCS, HDFCBANK).")
-        else:
-            st.info("⚠️ Please click **'🚀 Run Institutional Prediction Scan'** in the Market Screener tab first to load the live analysis for your portfolio.")
-    else:
-        st.caption("Your portfolio is currently empty. Add stocks above to begin monitoring.")
-        
