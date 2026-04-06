@@ -3,13 +3,16 @@ import pandas as pd
 import numpy as np
 import json
 import os
+import requests
+import base64
 
 st.set_page_config(page_title="Quantum-Sentinel Pro", layout="wide")
 
 PORTFOLIO_FILE = "portfolio.json"
 
-# --- PERSISTENCE HELPERS ---
+# --- GITHUB PERSISTENCE ENGINE ---
 def load_portfolio():
+    """Load portfolio from GitHub or local file."""
     if os.path.exists(PORTFOLIO_FILE):
         try:
             with open(PORTFOLIO_FILE, "r") as f:
@@ -19,26 +22,52 @@ def load_portfolio():
     return {}
 
 def save_portfolio(portfolio):
+    """Saves portfolio locally and pushes to GitHub repository."""
+    # 1. Update local file for immediate session use
     with open(PORTFOLIO_FILE, "w") as f:
         json.dump(portfolio, f)
+    
+    # 2. Push to GitHub using Secrets
+    try:
+        token = st.secrets["GITHUB_TOKEN"]
+        repo = st.secrets["REPO_NAME"]
+        path = PORTFOLIO_FILE
+        url = f"https://api.github.com/repos/{repo}/contents/{path}"
+        headers = {"Authorization": f"token {token}"}
+        
+        # Get SHA of existing file
+        res = requests.get(url, headers=headers)
+        sha = res.json().get("sha") if res.status_code == 200 else None
+        
+        content = base64.b64encode(json.dumps(portfolio).encode()).decode()
+        payload = {
+            "message": "Update Portfolio via App",
+            "content": content,
+            "branch": "main"
+        }
+        if sha: payload["sha"] = sha
+        
+        requests.put(url, headers=headers, json=payload)
+    except Exception as e:
+        st.error(f"GitHub Sync Failed: Ensure Secrets are configured. Error: {e}")
 
 @st.cache_data
-def load_all():
+def load_all_data():
     try:
         data = pd.read_parquet("market_data.parquet", engine='pyarrow')
         meta = pd.read_csv("tickers_enriched.csv")
         return data, meta
     except: return None, None
 
-data, meta = load_all()
+data, meta = load_all_data()
 if data is None:
-    st.error("Market data missing. Please trigger the 'download' task.")
+    st.error("Market data missing. Please ensure GitHub Actions have run.")
     st.stop()
 
 def clean_sym(s): return s.replace(".NS", "").replace("_", "&")
 close_prices = data['Close']
 
-# --- SIDEBAR: RISK & FILTERS ---
+# --- SIDEBAR: STRATEGY & FILTERS ---
 st.sidebar.title("🛡️ Strategy Control")
 n_sym = "^NSEI"
 n_close = close_prices[n_sym].dropna()
@@ -55,17 +84,15 @@ else:
 
 st.sidebar.markdown("---")
 st.sidebar.subheader("🎯 Result Filters")
-min_rating = st.sidebar.slider("Minimum Rating", 0, 10, 6)
+min_rating = st.sidebar.slider("Minimum Rating Score", 0, 10, 6)
 all_sectors = sorted(meta['SECTOR'].unique().tolist())
 sel_sectors = st.sidebar.multiselect("Filter by Sector", options=all_sectors)
-
-# FIXED: Added Apply Button for Filters
-apply_filters = st.sidebar.button("✅ Apply Filters & Refresh")
+st.sidebar.button("✅ Apply Filters & Refresh")
 
 st.title("🎯 Quantum-Sentinel: Personal Swing Predictor")
 tab1, tab2 = st.tabs(["📊 Market Screener", "💼 My Portfolio"])
 
-# --- TAB 1: SCREENER (RESTORED ORIGINAL FIELDS) ---
+# --- TAB 1: MARKET SCREENER ---
 with tab1:
     if st.button("🔍 Run Full Market Scan"):
         results = []
@@ -111,20 +138,17 @@ with tab1:
 
     if 'raw_results' in st.session_state:
         df_show = st.session_state['raw_results'].copy()
-        
-        # Applying Filters from Sidebar
         df_show = df_show[df_show['Rating'] >= min_rating]
-        if sel_sectors:
-            df_show = df_show[df_show['Sector'].isin(sel_sectors)]
+        if sel_sectors: df_show = df_show[df_show['Sector'].isin(sel_sectors)]
             
         search = st.text_input("🔍 Search Stock:").upper()
         if search: df_show = df_show[df_show['Stock'].str.contains(search)]
-        
         st.dataframe(df_show, use_container_width=True, hide_index=True)
 
-# --- TAB 2: PORTFOLIO (WITH NEW COLUMNS & TOTALS) ---
+# --- TAB 2: MY PORTFOLIO ---
 with tab2:
-    if 'portfolio' not in st.session_state: st.session_state['portfolio'] = load_portfolio()
+    if 'portfolio' not in st.session_state: 
+        st.session_state['portfolio'] = load_portfolio()
     
     with st.expander("➕ Add / Edit Position", expanded=False):
         with st.form("p_form"):
@@ -155,8 +179,6 @@ with tab2:
                 val = cp * d['qty']
                 pnl = val - inv
                 p_pct = (pnl / inv * 100) if inv > 0 else 0
-                
-                # New logic for "Target Additional %"
                 t_price = live['Target']
                 t_increase = round(((t_price - cp) / cp * 100), 1)
 
@@ -167,43 +189,6 @@ with tab2:
                 else: v = "🟡 HOLD"
 
                 row.update({
-                    "Current Price": cp,
-                    "Current Value": round(val, 1),
-                    "Unrealised Profit": round(pnl, 1),
-                    "Profit %": round(p_pct, 1),
-                    "Target Price": t_price,
-                    "Target Addl. %": t_increase,
-                    "Verdict": v
-                })
-            else:
-                row.update({k: 0.0 for k in ["Current Price", "Current Value", "Unrealised Profit", "Profit %", "Target Price", "Target Addl. %"]})
-                row.update({"Verdict": "Scan Market First"})
-            p_list.append(row)
-
-        df_p = pd.DataFrame(p_list)
-        if not df_p.empty and "Current Value" in df_p.columns:
-            total_row = pd.DataFrame([{
-                "Stock": "TOTAL", 
-                "Invested": df_p["Invested"].sum(), 
-                "Current Value": df_p["Current Value"].sum(), 
-                "Unrealised Profit": df_p["Unrealised Profit"].sum(), 
-                "Profit %": round((df_p["Unrealised Profit"].sum()/df_p["Invested"].sum()*100),1) if df_p["Invested"].sum()>0 else 0
-            }])
-            df_p = pd.concat([df_p, total_row], ignore_index=True).fillna("-")
-
-        st.dataframe(df_p, use_container_width=True, hide_index=True)
-        
-        # --- SUMMARY SECTION ---
-        st.subheader("📝 Trading Session Actionables")
-        col1, col2 = st.columns(2)
-        with col1:
-            st.info("**Portfolio Risk Management**")
-            if a_sell: st.error(f"⚠️ **EXIT:** {', '.join(a_sell)} (Technical weakness)")
-            if a_add: st.success(f"💎 **ADD:** {', '.join(a_add)} (Strong momentum)")
-            if not a_sell and not a_add: st.write("Portfolio remains technically sound.")
-        with col2:
-            st.success("**New Market Opportunities**")
-            if not m_df.empty:
-                top = m_df[~m_df['Stock'].isin(st.session_state['portfolio'].keys())].head(3)
-                for _, r in top.iterrows(): st.write(f"🚀 **{r['Stock']}** (Target: {r['Target']} | {r['Upside %']}% Potential)")
-                    
+                    "Current Price": cp, "Current Value": round(val, 1),
+                    "Unrealised Profit": round(p
+            
