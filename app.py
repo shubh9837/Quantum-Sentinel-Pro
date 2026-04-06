@@ -12,7 +12,7 @@ PORTFOLIO_FILE = "portfolio.json"
 
 # --- GITHUB PERSISTENCE ENGINE ---
 def load_portfolio():
-    """Load portfolio from GitHub or local file."""
+    """Load portfolio from local file if it exists."""
     if os.path.exists(PORTFOLIO_FILE):
         try:
             with open(PORTFOLIO_FILE, "r") as f:
@@ -29,27 +29,28 @@ def save_portfolio(portfolio):
     
     # 2. Push to GitHub using Secrets
     try:
-        token = st.secrets["GITHUB_TOKEN"]
-        repo = st.secrets["REPO_NAME"]
-        path = PORTFOLIO_FILE
-        url = f"https://api.github.com/repos/{repo}/contents/{path}"
-        headers = {"Authorization": f"token {token}"}
-        
-        # Get SHA of existing file
-        res = requests.get(url, headers=headers)
-        sha = res.json().get("sha") if res.status_code == 200 else None
-        
-        content = base64.b64encode(json.dumps(portfolio).encode()).decode()
-        payload = {
-            "message": "Update Portfolio via App",
-            "content": content,
-            "branch": "main"
-        }
-        if sha: payload["sha"] = sha
-        
-        requests.put(url, headers=headers, json=payload)
+        if "GITHUB_TOKEN" in st.secrets and "REPO_NAME" in st.secrets:
+            token = st.secrets["GITHUB_TOKEN"]
+            repo = st.secrets["REPO_NAME"]
+            path = PORTFOLIO_FILE
+            url = f"https://api.github.com/repos/{repo}/contents/{path}"
+            headers = {"Authorization": f"token {token}"}
+            
+            # Get SHA of existing file
+            res = requests.get(url, headers=headers)
+            sha = res.json().get("sha") if res.status_code == 200 else None
+            
+            content = base64.b64encode(json.dumps(portfolio).encode()).decode()
+            payload = {
+                "message": "Update Portfolio via App",
+                "content": content,
+                "branch": "main"
+            }
+            if sha: payload["sha"] = sha
+            
+            requests.put(url, headers=headers, json=payload)
     except Exception as e:
-        st.error(f"GitHub Sync Failed: Ensure Secrets are configured. Error: {e}")
+        st.error(f"GitHub Sync Failed: {e}")
 
 @st.cache_data
 def load_all_data():
@@ -108,7 +109,6 @@ with tab1:
                 curr = s_data.iloc[-1]
                 e20 = s_data.ewm(span=20).mean().iloc[-1]
                 e50 = s_data.ewm(span=50).mean().iloc[-1]
-                
                 rel_str = ((curr - s_data.iloc[-60])/s_data.iloc[-60]) - n_60d_ret
                 vol = s_data.pct_change().std() * np.sqrt(20) 
                 
@@ -120,7 +120,6 @@ with tab1:
                 rating = max(0, min(10, int(score)))
                 target = round(float(curr * (1 + vol)), 1)
                 upside = round(((target - curr) / curr) * 100, 1)
-                
                 clean_t = clean_sym(t)
                 sector = meta.loc[meta['SYMBOL'] == clean_t, 'SECTOR'].values[0] if clean_t in meta['SYMBOL'].values else "Other"
 
@@ -140,7 +139,6 @@ with tab1:
         df_show = st.session_state['raw_results'].copy()
         df_show = df_show[df_show['Rating'] >= min_rating]
         if sel_sectors: df_show = df_show[df_show['Sector'].isin(sel_sectors)]
-            
         search = st.text_input("🔍 Search Stock:").upper()
         if search: df_show = df_show[df_show['Stock'].str.contains(search)]
         st.dataframe(df_show, use_container_width=True, hide_index=True)
@@ -148,47 +146,5 @@ with tab1:
 # --- TAB 2: MY PORTFOLIO ---
 with tab2:
     if 'portfolio' not in st.session_state: 
-        st.session_state['portfolio'] = load_portfolio()
-    
-    with st.expander("➕ Add / Edit Position", expanded=False):
-        with st.form("p_form"):
-            all_syms = sorted(meta['SYMBOL'].astype(str).unique().tolist())
-            s_sym = st.selectbox("Select Stock", [""] + all_syms)
-            ex = st.session_state['portfolio'].get(s_sym, {"price": 0.0, "qty": 0})
-            c1, c2 = st.columns(2)
-            s_p = c1.number_input("Avg Buy Price", value=float(ex['price']))
-            s_q = c2.number_input("Quantity", value=int(ex['qty']), min_value=0)
-            if st.form_submit_button("Save Position"):
-                if s_sym:
-                    if s_q == 0: st.session_state['portfolio'].pop(s_sym, None)
-                    else: st.session_state['portfolio'][s_sym] = {"price": s_p, "qty": s_q}
-                    save_portfolio(st.session_state['portfolio'])
-                    st.rerun()
-
-    if st.session_state['portfolio']:
-        p_list, a_sell, a_add = [], [], []
-        m_df = st.session_state.get('raw_results', pd.DataFrame())
-
-        for sym, d in st.session_state['portfolio'].items():
-            inv = d['price'] * d['qty']
-            row = {"Stock": sym, "Avg Price": round(d['price'], 1), "Qty": d['qty'], "Invested": round(inv, 1)}
-            
-            if not m_df.empty and sym in m_df['Stock'].values:
-                live = m_df[m_df['Stock'] == sym].iloc[0]
-                cp = float(live['Current Price'])
-                val = cp * d['qty']
-                pnl = val - inv
-                p_pct = (pnl / inv * 100) if inv > 0 else 0
-                t_price = live['Target']
-                t_increase = round(((t_price - cp) / cp * 100), 1)
-
-                if p_pct <= -7.0 or int(live['Rating']) <= 3: 
-                    v, a_sell = "🔴 SELL", a_sell + [sym]
-                elif int(live['Rating']) >= 8: 
-                    v, a_add = "🔵 BUY/ADD", a_add + [sym]
-                else: v = "🟡 HOLD"
-
-                row.update({
-                    "Current Price": cp, "Current Value": round(val, 1),
-                    "Unrealised Profit": round(p
-            
+        st.session_state['portfolio'] = load
+        
