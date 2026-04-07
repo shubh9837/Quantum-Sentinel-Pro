@@ -1,0 +1,35 @@
+name: Daily Stock Data Update
+
+on:
+  schedule:
+    - cron: '30 15 * * *' # Runs daily at 9:00 PM IST
+  workflow_dispatch: # Allows you to run it manually
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install yfinance pandas pyarrow requests
+
+      - name: Run Enrichment and Data Update
+        run: |
+          python enrich_metadata.py
+          python update_market_data.py
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add tickers_enriched.csv market_data.parquet
+          git commit -m "Automated Daily Data Update" || exit 0
+          git push
+          
