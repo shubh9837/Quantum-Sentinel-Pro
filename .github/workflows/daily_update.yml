@@ -25,13 +25,16 @@ jobs:
           python enrich_metadata.py
           python update_market_data.py
 
-      - name: Commit and Push changes
+            - name: Commit and Push changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
+          # This line below is the fix: it syncs before saving
+          git pull origin main --rebase
           git add tickers_enriched.csv market_data.parquet
           git commit -m "Automated Daily Data Update" || exit 0
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+          
 
