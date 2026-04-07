@@ -5,7 +5,7 @@ import time
 def enrich_tickers():
     # 1. Load your raw list
     try:
-        df = pd.read_csv("Tickers.csv")
+        df = pd.read_csv("tickers.csv")
         symbols = df['SYMBOL'].tolist()
     except Exception as e:
         print(f"Error reading Tickers.csv: {e}")
