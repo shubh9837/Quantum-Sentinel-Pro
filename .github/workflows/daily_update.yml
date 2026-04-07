@@ -3,14 +3,19 @@ name: Daily Stock Data Update
 on:
   schedule:
     - cron: '30 15 * * *' # Runs daily at 9:00 PM IST
-  workflow_dispatch: # Allows you to run it manually
+  workflow_dispatch: # Allows manual run
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Added permissions block to ensure the Bot has full access
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetches full history to avoid "shallow" errors
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -20,21 +25,21 @@ jobs:
       - name: Install dependencies
         run: pip install yfinance pandas pyarrow requests
 
-      - name: Run Enrichment and Data Update
+      - name: Run Data Update
         run: |
           python enrich_metadata.py
           python update_market_data.py
 
-            - name: Commit and Push changes
+      - name: Force Sync and Push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
-          # This line below is the fix: it syncs before saving
-          git pull origin main --rebase
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Fix for Merge Conflicts: Always take the newest data
           git add tickers_enriched.csv market_data.parquet
           git commit -m "Automated Daily Data Update" || exit 0
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
           
-
+          # This line forces the update even if there's a minor conflict
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main --force
