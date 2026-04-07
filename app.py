@@ -12,7 +12,6 @@ PORTFOLIO_FILE = "portfolio.json"
 
 # --- GITHUB PERSISTENCE ENGINE ---
 def load_portfolio():
-    """Load portfolio from local file if it exists."""
     if os.path.exists(PORTFOLIO_FILE):
         try:
             with open(PORTFOLIO_FILE, "r") as f:
@@ -22,12 +21,8 @@ def load_portfolio():
     return {}
 
 def save_portfolio(portfolio):
-    """Saves portfolio locally and pushes to GitHub repository."""
-    # 1. Update local file for immediate session use
     with open(PORTFOLIO_FILE, "w") as f:
         json.dump(portfolio, f)
-    
-    # 2. Push to GitHub using Secrets
     try:
         if "GITHUB_TOKEN" in st.secrets and "REPO_NAME" in st.secrets:
             token = st.secrets["GITHUB_TOKEN"]
@@ -35,19 +30,11 @@ def save_portfolio(portfolio):
             path = PORTFOLIO_FILE
             url = f"https://api.github.com/repos/{repo}/contents/{path}"
             headers = {"Authorization": f"token {token}"}
-            
-            # Get SHA of existing file
             res = requests.get(url, headers=headers)
             sha = res.json().get("sha") if res.status_code == 200 else None
-            
             content = base64.b64encode(json.dumps(portfolio).encode()).decode()
-            payload = {
-                "message": "Update Portfolio via App",
-                "content": content,
-                "branch": "main"
-            }
+            payload = {"message": "Update Portfolio via App", "content": content, "branch": "main"}
             if sha: payload["sha"] = sha
-            
             requests.put(url, headers=headers, json=payload)
     except Exception as e:
         st.error(f"GitHub Sync Failed: {e}")
@@ -66,11 +53,16 @@ if data is None:
     st.stop()
 
 def clean_sym(s): return s.replace(".NS", "").replace("_", "&")
-close_prices = data['Close']
+
+# Extract Close prices for basic indexing
+if isinstance(data.columns, pd.MultiIndex):
+    close_prices = data['Close']
+else:
+    close_prices = data # Fallback if data is flat
 
 # --- SIDEBAR: STRATEGY & FILTERS ---
 st.sidebar.title("🛡️ Strategy Control")
-n_sym = "^NSEI"
+n_sym = "^NSEI" if "^NSEI" in close_prices.columns else close_prices.columns[0]
 n_close = close_prices[n_sym].dropna()
 n_curr = n_close.iloc[-1]
 n_ema50 = n_close.ewm(span=50).mean().iloc[-1]
@@ -93,33 +85,78 @@ st.sidebar.button("✅ Apply Filters & Refresh")
 st.title("🎯 Quantum-Sentinel: Personal Swing Predictor")
 tab1, tab2 = st.tabs(["📊 Market Screener", "💼 My Portfolio"])
 
-# --- TAB 1: MARKET SCREENER ---
+# --- TAB 1: ADVANCED MARKET SCREENER ---
 with tab1:
     if st.button("🔍 Run Full Market Scan"):
         results = []
-        n_60d_ret = (n_curr - n_close.iloc[-60]) / n_close.iloc[-60]
         prog = st.progress(0)
         ticks = [t for t in close_prices.columns if t != n_sym]
         
         for i, t in enumerate(ticks):
             try:
-                s_data = close_prices[t].dropna()
-                if len(s_data) < 60: continue
+                c_data = close_prices[t].dropna()
+                if len(c_data) < 200: continue # Require 200 days for true baseline
                 
-                curr = s_data.iloc[-1]
-                e20 = s_data.ewm(span=20).mean().iloc[-1]
-                e50 = s_data.ewm(span=50).mean().iloc[-1]
-                rel_str = ((curr - s_data.iloc[-60])/s_data.iloc[-60]) - n_60d_ret
-                vol = s_data.pct_change().std() * np.sqrt(20) 
+                curr = c_data.iloc[-1]
+                e20 = c_data.ewm(span=20).mean().iloc[-1]
+                e50 = c_data.ewm(span=50).mean().iloc[-1]
+                e200 = c_data.ewm(span=200).mean().iloc[-1]
                 
-                score = 4 + m_bonus
+                # --- Advanced Scoring Logic ---
+                score = 2 + m_bonus # Base score
+                
+                # 1. Trend Filter
+                if curr > e200: score += 2
+                else: score -= 2 # Penalize if below 200 EMA
+                
                 if curr > e20: score += 1
                 if e20 > e50: score += 1
-                if rel_str > 0: score += 2
                 
+                # 2. RSI (Momentum) Logic
+                delta = c_data.diff()
+                up = delta.clip(lower=0).ewm(com=13, adjust=False).mean()
+                down = -1 * delta.clip(upper=0).ewm(com=13, adjust=False).mean()
+                rs = up / down
+                rsi = 100 - (100 / (1 + rs))
+                curr_rsi = rsi.iloc[-1]
+                
+                if 50 <= curr_rsi <= 70: score += 1 # Sweet spot
+                elif curr_rsi > 75: score -= 2 # Overbought penalty
+                
+                # 3. ATR & Volume (Attempt to use advanced metrics if available)
+                target = 0.0
+                has_adv_data = False
+                
+                if isinstance(data.columns, pd.MultiIndex) and 'Volume' in data.columns.levels[0] and 'High' in data.columns.levels[0] and 'Low' in data.columns.levels[0]:
+                    v_data = data['Volume'][t].dropna()
+                    h_data = data['High'][t].dropna()
+                    l_data = data['Low'][t].dropna()
+                    
+                    if len(v_data) >= 20 and len(h_data) == len(c_data):
+                        # Volume Confirmation
+                        v_20ma = v_data.rolling(20).mean().iloc[-1]
+                        if v_data.iloc[-1] > (v_20ma * 1.2): # 20% higher than avg volume
+                            score += 1
+                        
+                        # ATR Calculation for Professional Target
+                        tr1 = h_data - l_data
+                        tr2 = (h_data - c_data.shift()).abs()
+                        tr3 = (l_data - c_data.shift()).abs()
+                        tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
+                        atr = tr.rolling(14).mean().iloc[-1]
+                        
+                        target = round(float(curr + (2 * atr)), 1)
+                        has_adv_data = True
+                
+                # Fallback target if Volume/High/Low are missing from the data
+                if not has_adv_data:
+                    vol = c_data.pct_change().std() * np.sqrt(20) 
+                    target = round(float(curr * (1 + vol)), 1)
+                
+                # Finalizing Verdict
                 rating = max(0, min(10, int(score)))
-                target = round(float(curr * (1 + vol)), 1)
-                upside = round(((target - curr) / curr) * 100, 1)
+                upside = round(((target - curr) / curr) * 100, 1) if curr > 0 else 0
+                
                 clean_t = clean_sym(t)
                 sector = meta.loc[meta['SYMBOL'] == clean_t, 'SECTOR'].values[0] if clean_t in meta['SYMBOL'].values else "Other"
 
@@ -129,21 +166,24 @@ with tab1:
                     "Upside %": upside, "Chances of Up (%)": rating * 10,
                     "Verdict": "🔥 Institutional Buy" if rating >= 8 else "✅ Momentum Play" if rating >= 6 else "↔️ Hold"
                 })
-            except: continue
+            except Exception: continue
             if i % 100 == 0: prog.progress(i/len(ticks))
         
         st.session_state['raw_results'] = pd.DataFrame(results)
         prog.empty()
 
-    if 'raw_results' in st.session_state:
+    if 'raw_results' in st.session_state and not st.session_state['raw_results'].empty:
         df_show = st.session_state['raw_results'].copy()
         df_show = df_show[df_show['Rating'] >= min_rating]
         if sel_sectors: df_show = df_show[df_show['Sector'].isin(sel_sectors)]
         search = st.text_input("🔍 Search Stock:").upper()
         if search: df_show = df_show[df_show['Stock'].str.contains(search)]
+        
+        # Sort by Rating to show the best opportunities first
+        df_show = df_show.sort_values(by="Rating", ascending=False)
         st.dataframe(df_show, use_container_width=True, hide_index=True)
 
-# --- TAB 2: MY PORTFOLIO ---
+# --- TAB 2: MY PORTFOLIO (Unchanged UI, Enhanced Data Integration) ---
 with tab2:
     if 'portfolio' not in st.session_state: 
         st.session_state['portfolio'] = load_portfolio()
@@ -223,4 +263,3 @@ with tab2:
                 top = m_df[~m_df['Stock'].isin(st.session_state['portfolio'].keys())].head(3)
                 for _, r in top.iterrows(): 
                     st.write(f"🚀 **{r['Stock']}** (Target: {r['Target']} | {r['Upside %']}% Potential)")
-                    
