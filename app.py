@@ -170,3 +170,4 @@ with tab2:
                 row.update({"Current Price": live['Price'], "Value": round(val, 1), "P&L %": round((pnl/row['Invested']*100), 1), "Verdict": live['Sentiment']})
             p_data.append(row)
         st.dataframe(pd.DataFrame(p_data), use_container_width=True, hide_index=True)
+                
