@@ -1,14 +1,22 @@
 import yfinance as yf
 import pandas as pd
 import time
+import os
 
 def enrich_tickers():
+    # Safety Check: Try both names
+    file_name = "Tickers.csv" if os.path.exists("Tickers.csv") else "tickers.csv"
+    
+    if not os.path.exists(file_name):
+        print(f"❌ Error: Neither Tickers.csv nor tickers.csv found!")
+        return
+
     try:
-        # FIXED: Changed to capital T to match your file name
-        df = pd.read_csv("Tickers.csv") 
+        df = pd.read_csv(file_name)
         symbols = df['SYMBOL'].tolist()
+        print(f"Found {len(symbols)} symbols in {file_name}")
     except Exception as e:
-        print(f"Error: Could not find Tickers.csv. Please check the name. {e}")
+        print(f"❌ Error reading file: {e}")
         return
 
     enriched_data = []
@@ -22,7 +30,7 @@ def enrich_tickers():
             print(f"✅ {sym} processed")
         except:
             enriched_data.append({"SYMBOL": sym, "SECTOR": "Other", "MARKET_CAP": 0})
-        time.sleep(0.2)
+        time.sleep(0.1)
 
     pd.DataFrame(enriched_data).to_csv("tickers_enriched.csv", index=False)
     print("✨ Metadata updated.")
