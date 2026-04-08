@@ -2,118 +2,132 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
+import json
 import yfinance as yf
 
 st.set_page_config(page_title="Quantum-Sentinel Pro", layout="wide")
 
-# --- DATA LOADING ---
+# --- DATA & PORTFOLIO PERSISTENCE ---
+PORTFOLIO_FILE = "portfolio.json"
+
+def load_portfolio():
+    if os.path.exists(PORTFOLIO_FILE):
+        try:
+            with open(PORTFOLIO_FILE, "r") as f: return json.load(f)
+        except: return {}
+    return {}
+
+def save_portfolio(p):
+    with open(PORTFOLIO_FILE, "w") as f: json.dump(p, f)
+
 @st.cache_data
 def load_data():
     try:
         if not os.path.exists("market_data.parquet") or not os.path.exists("tickers_enriched.csv"):
             return None, None
-        data = pd.read_parquet("market_data.parquet")
-        meta = pd.read_csv("tickers_enriched.csv")
-        # Validate data is not empty
-        if data.empty or meta.empty:
-            return None, None
-        return data, meta
+        return pd.read_parquet("market_data.parquet"), pd.read_csv("tickers_enriched.csv")
     except: return None, None
 
 market_raw, meta = load_data()
 
-# --- THE LOGIC ENGINE ---
+# --- BACKEND LOGIC UPGRADES ---
 def calculate_atr(df, period=14):
-    if len(df) < period: return pd.Series([0] * len(df))
     high_low = df['High'] - df['Low']
     high_close = np.abs(df['High'] - df['Close'].shift())
     low_close = np.abs(df['Low'] - df['Close'].shift())
-    ranges = pd.concat([high_low, high_close, low_close], axis=1)
-    true_range = np.max(ranges, axis=1)
-    return true_range.rolling(period).mean()
+    tr = pd.concat([high_low, high_close, low_close], axis=1).max(axis=1)
+    return tr.rolling(period).mean()
 
 @st.cache_data(ttl=3600)
-def get_sentiment_score(symbol):
+def get_sentiment(sym):
     try:
-        ticker = yf.Ticker(f"{symbol}.NS")
-        news = ticker.news[:3]
-        score = 0
-        pos = ['profit', 'growth', 'order', 'deal', 'expansion', 'buy', 'upgrade']
-        for n in news:
-            title = n.get('title', '').lower()
-            if any(w in title for w in pos): score += 1
+        t = yf.Ticker(f"{sym}.NS")
+        news = t.news[:3]
+        score = sum(1 for n in news if any(w in n.get('title','').lower() for w in ['profit','growth','order','win','buy']))
         return score
     except: return 0
 
-# --- UI INTERFACE ---
-st.title("🛡️ Quantum-Sentinel Pro")
+# --- INTERFACE RESTORATION ---
+st.title("🎯 Quantum-Sentinel Pro")
 
 if market_raw is None:
-    st.error("⚠️ Data files are empty or missing. Please trigger 'Run workflow' in GitHub Actions and wait 5 minutes.")
+    st.error("⚠️ Data files not found. Please run the GitHub Action.")
     st.stop()
 
-# --- ROBUST MARKET STATUS ---
+# SIDEBAR: Nifty Context (Fixed)
 try:
     prices = market_raw['Close']
-    available_tickers = prices.columns.tolist()
-    nifty_sym = "^NSEI" if "^NSEI" in available_tickers else available_tickers[0]
-    nifty_close = prices[nifty_sym].dropna()
-    
-    if not nifty_close.empty:
-        nifty_ema = nifty_close.ewm(span=50).mean()
-        market_status = "BULLISH" if nifty_close.iloc[-1] > nifty_ema.iloc[-1] else "BEARISH"
-        st.sidebar.metric("Market Trend", market_status)
-    else:
-        market_status = "NEUTRAL (No Data)"
-        st.sidebar.warning("Nifty data missing")
+    nifty_sym = "^NSEI" if "^NSEI" in prices.columns else prices.columns[0]
+    n_close = prices[nifty_sym].dropna()
+    m_trend = "BULLISH" if n_close.iloc[-1] > n_close.ewm(span=50).mean().iloc[-1] else "BEARISH"
+    st.sidebar.metric("Market Status", m_trend, delta="Nifty 50 Trend")
 except:
-    market_status = "NEUTRAL"
-    st.sidebar.info("Market Trend Unavailable")
+    m_trend = "NEUTRAL"
+    st.sidebar.warning("Nifty Data Syncing...")
 
-tab1, tab2 = st.tabs(["🔍 Intelligence Screener", "💼 Portfolio Analytics"])
+tab1, tab2 = st.tabs(["📊 Screener", "💼 Portfolio Analytics"])
 
 with tab1:
-    min_score = st.slider("Minimum Rating", 1, 10, 7)
-    if st.button("🚀 Run Multi-Factor Deep Scan"):
+    min_rating = st.sidebar.slider("Min Buy Rating", 1, 10, 7)
+    if st.button("🔍 Run Full Market Scan"):
         results = []
-        scan_list = [t for t in market_raw['Close'].columns if t != "^NSEI"]
+        prog = st.progress(0)
+        ticks = [t for t in prices.columns if t != "^NSEI"]
         
-        for t in scan_list:
+        for i, t in enumerate(ticks):
             try:
-                # Handle MultiIndex if present
-                if isinstance(market_raw.columns, pd.MultiIndex):
-                    df_stock = market_raw.xs(t, axis=1, level=1).dropna()
-                else:
-                    # Fallback for simpler structures
-                    df_stock = pd.DataFrame({
-                        'Close': market_raw['Close'][t],
-                        'High': market_raw['High'][t],
-                        'Low': market_raw['Low'][t]
-                    }).dropna()
+                df = market_raw.xs(t, axis=1, level=1).dropna() if isinstance(market_raw.columns, pd.MultiIndex) else market_raw[t].dropna()
+                if len(df) < 50: continue
                 
-                if len(df_stock) < 20: continue
+                curr = df['Close'].iloc[-1]
+                ema20 = df['Close'].ewm(span=20).mean().iloc[-1]
+                atr = calculate_atr(df).iloc[-1]
                 
-                curr = df_stock['Close'].iloc[-1]
-                ema20 = df_stock['Close'].ewm(span=20).mean().iloc[-1]
-                atr = calculate_atr(df_stock).iloc[-1]
-                
+                # STRENGTHENED SCORING
                 score = 5
                 if curr > ema20: score += 1
-                if market_status == "BULLISH": score += 2
+                if m_trend == "BULLISH": score += 2
                 
-                clean_sym = t.replace(".NS", "")
-                sentiment = get_sentiment_score(clean_sym)
-                score += sentiment
+                clean_s = t.replace(".NS","")
+                sent = get_sentiment(clean_s)
+                score += sent
                 
                 results.append({
-                    "Stock": clean_sym, "Rating": int(score),
-                    "Price": round(curr, 2), "Target": round(curr + (atr*2), 2),
-                    "Sentiment": "Positive" if sentiment > 0 else "Neutral"
+                    "Stock": clean_s, "Rating": int(score), "Price": round(curr,1),
+                    "Target": round(curr + (atr*2),1), "Sentiment": "Positive" if sent > 0 else "Neutral"
                 })
             except: continue
+            if i % 50 == 0: prog.progress(i/len(ticks))
         
-        if results:
-            st.dataframe(pd.DataFrame(results).sort_values("Rating", ascending=False), hide_index=True)
-        else:
-            st.info("No stocks matched the criteria.")
-            
+        st.session_state['scan'] = pd.DataFrame(results)
+        prog.empty()
+
+    if 'scan' in st.session_state:
+        df_res = st.session_state['scan']
+        # Filter Logic Fix: Rating must be >= slider
+        filtered = df_res[df_res['Rating'] >= min_rating].sort_values("Rating", ascending=False)
+        st.dataframe(filtered, use_container_width=True, hide_index=True)
+
+with tab2:
+    st.subheader("Your Holdings")
+    if 'portfolio' not in st.session_state: st.session_state['portfolio'] = load_portfolio()
+    
+    # Portfolio Input Area
+    with st.expander("➕ Add/Update Stock"):
+        c1, c2, c3 = st.columns(3)
+        p_sym = c1.text_input("Symbol (e.g. RELIANCE)").upper()
+        p_prc = c2.number_input("Avg Price")
+        p_qty = c3.number_input("Qty", step=1)
+        if st.button("Update Portfolio"):
+            if p_qty <= 0: st.session_state['portfolio'].pop(p_sym, None)
+            else: st.session_state['portfolio'][p_sym] = {"price": p_prc, "qty": p_qty}
+            save_portfolio(st.session_state['portfolio'])
+            st.rerun()
+
+    if st.session_state['portfolio']:
+        p_df = pd.DataFrame.from_dict(st.session_state['portfolio'], orient='index').reset_index()
+        p_df.columns = ['Stock', 'Avg Price', 'Qty']
+        st.table(p_df)
+    else:
+        st.info("Portfolio is empty. Add stocks above.")
+        
