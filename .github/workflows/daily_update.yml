@@ -2,20 +2,19 @@ name: Daily Stock Data Update
 
 on:
   schedule:
-    - cron: '30 15 * * *' # Runs daily at 9:00 PM IST
-  workflow_dispatch: # Allows manual run
+    - cron: '30 15 * * *'
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Added permissions block to ensure the Bot has full access
     permissions:
       contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # Fetches full history to avoid "shallow" errors
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -30,16 +29,13 @@ jobs:
           python enrich_metadata.py
           python update_market_data.py
 
-      - name: Force Sync and Push
+      - name: Commit and Push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          
-          # Fix for Merge Conflicts: Always take the newest data
-          git add tickers_enriched.csv market_data.parquet
+          git add -f tickers_enriched.csv market_data.parquet
           git commit -m "Automated Daily Data Update" || exit 0
+          git push origin main --force
           
-          # This line forces the update even if there's a minor conflict
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main --force
