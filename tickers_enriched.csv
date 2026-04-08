@@ -29,7 +29,7 @@ ABCOTS,Consumer Cyclical,892.93
 ABDL,Consumer Defensive,11750.62
 ABFRL,Consumer Cyclical,7013.69
 ABINFRA,Industrials,1012.48
-ABLBL,Consumer Cyclical,11914.0
+ABLBL,Consumer Cyclical,11898.3
 ABMINTLLTD,Basic Materials,41.09
 ABREL,Real Estate,13081.36
 ABSLAMC,Financial Services,26863.31
@@ -655,7 +655,7 @@ FISCHER,Healthcare,2640.89
 FIVESTAR,Financial Services,11051.23
 FLAIR,Industrials,3122.34
 FLEXITUFF,Consumer Cyclical,20.62
-FLFL,Consumer Cyclical,24.54
+FLFL,Consumer Cyclical,24.21
 FLUOROCHEM,Basic Materials,35548.56
 FMGOETZE,Consumer Cyclical,2397.74
 FMNL,Real Estate,51.68
@@ -1587,680 +1587,680 @@ PURVA,Real Estate,4129.49
 PVP,Industrials,688.14
 PVRINOX,Communication Services,9293.64
 PVSL,Consumer Cyclical,686.42
-PWL,Consumer Defensive,27169.94
-PYRAMID,Consumer Cyclical,556.89
-QPOWER,Industrials,6636.57
-QUADFUTURE,Industrials,1157.6
-QUESS,Industrials,2723.36
-QUICKHEAL,Technology,798.2
-RACE,Industrials,226.55
-RACLGEAR,Consumer Cyclical,1473.4
-RADAAN,Communication Services,16.66
-RADHIKAJWE,Consumer Cyclical,695.53
-RADIANTCMS,Industrials,417.44
-RADICO,Consumer Defensive,35225.49
-RADIOCITY,Communication Services,218.54
-RAILTEL,Communication Services,8628.43
-RAIN,Basic Materials,3712.25
-RAINBOW,Healthcare,12484.97
-RAJESHEXPO,Consumer Cyclical,2842.3
-RAJMET,Basic Materials,106.72
-RAJOOENG,Industrials,1016.31
-RAJRATAN,Basic Materials,1879.67
-RAJRILTD,Consumer Cyclical,1165.6
-RAJSREESUG,Consumer Defensive,93.08
-RAJTV,Communication Services,118.99
-RALLIS,Basic Materials,4922.79
-RAMANEWS,Consumer Defensive,455.26
-RAMAPHO,Basic Materials,431.48
-RAMASTEEL,Basic Materials,772.21
-RAMCOCEM,Basic Materials,22320.18
-RAMCOIND,Industrials,2227.57
-RAMCOSYS,Technology,1534.22
-RAMKY,Industrials,3237.42
-RAMRAT,Industrials,2902.22
-RANASUG,Consumer Defensive,198.56
-RANEHOLDIN,Consumer Cyclical,1441.7
-RATEGAIN,Technology,5991.1
-RATNAMANI,Basic Materials,15470.55
-RATNAVEER,Basic Materials,946.06
-RAYMOND,Industrials,2350.93
-RAYMONDLSL,Consumer Cyclical,4806.01
-RAYMONDREL,Real Estate,2761.55
-RBA,Consumer Cyclical,3552.05
-RBLBANK,Financial Services,19329.47
-RBZJEWEL,Consumer Cyclical,537.68
-RCF,Basic Materials,6488.4
-RCOM,Communication Services,248.8
-RECLTD,Financial Services,86737.39
-REDINGTON,Technology,16174.13
-REDTAPE,Consumer Cyclical,6303.11
-REFEX,Energy,2922.48
-REGAAL,Consumer Defensive,708.79
-REGENCERAM,Industrials,125.19
-RELAXO,Consumer Cyclical,6717.86
-RELCHEMQ,Consumer Cyclical,86.55
-RELIABLE,Technology,118.26
-RELIANCE,Energy,1765446.31
-RELIGARE,Financial Services,7439.44
-RELINFRA,Utilities,3303.72
-RELTD,Technology,2432.53
-REMSONSIND,Consumer Cyclical,326.8
-RENUKA,Consumer Defensive,6007.27
-REPCOHOME,Financial Services,2359.5
-REPL,Industrials,146.5
-REPRO,Industrials,502.23
-RESPONIND,Basic Materials,3541.63
-RETAIL,Consumer Defensive,17.15
-RGL,Consumer Cyclical,1106.53
-RHETAN,Basic Materials,1955.5
-RHIM,Industrials,7748.97
-RHL,Consumer Cyclical,298.49
-RICOAUTO,Consumer Cyclical,1464.05
-RIIL,Industrials,1025.21
-RISHABH,Technology,1570.99
-RITCO,Industrials,531.17
-RITES,Industrials,9215.1
-RKDL,Consumer Defensive,45.1
-RKEC,Industrials,84.88
-RKFORGE,Industrials,9193.12
-RKSWAMY,Communication Services,420.22
-RMC,Industrials,418.42
-RMDRIP,Industrials,1182.55
-RML,Consumer Cyclical,1890.1
-RNBDENIMS,Consumer Cyclical,551.18
-ROHLTD,Consumer Cyclical,844.57
-ROLEXRINGS,Industrials,3261.46
-ROLLT,Real Estate,30.76
-ROML,Consumer Defensive,60.82
-ROSSARI,Basic Materials,2459.3
-ROSSELLIND,Industrials,177.88
-ROSSTECH,Industrials,2898.94
-ROTO,Industrials,1016.53
-ROUTE,Communication Services,2943.88
-RPEL,Basic Materials,2924.82
-RPGLIFE,Healthcare,3127.2
-RPOWER,Utilities,9677.7
-RPPINFRA,Industrials,345.44
-RPPL,Consumer Cyclical,117.35
-RPSGVENT,Technology,3583.09
-RPTECH,Technology,2432.36
-RRKABEL,Industrials,14950.29
-RSL,Basic Materials,1025.63
-RSSOFTWARE,Technology,68.79
-RSWM,Consumer Cyclical,626.03
-RSYSTEMS,Technology,3169.95
-RTNINDIA,Consumer Cyclical,4030.81
-RTNPOWER,Utilities,4435.71
-RUBFILA,Basic Materials,347.37
-RUBICON,Healthcare,12829.11
-RUBYMILLS,Consumer Cyclical,703.41
-RUCHINFRA,Industrials,156.54
-RUCHIRA,Basic Materials,323.19
-RUDRA,Basic Materials,178.21
-RUPA,Consumer Cyclical,1028.43
-RUSHIL,Consumer Cyclical,452.74
-RUSTOMJEE,Real Estate,4977.38
-RVHL,Real Estate,239.01
-RVNL,Industrials,54488.49
-RVTH,Industrials,184.92
-S&SPOWER,Industrials,390.61
-SAATVIKGL,Technology,5210.03
-SABEVENTS,Communication Services,9.83
-SADBHAV,Industrials,152.01
-SADBHIN,Industrials,84.18
-SADHNANIQ,Basic Materials,489.23
-SAFARI,Consumer Cyclical,7251.84
-SAGARDEEP,Basic Materials,38.96
-SAGCEM,Basic Materials,2264.98
-SAGILITY,Healthcare,19614.77
-SAHYADRI,Industrials,248.19
-SAIL,Basic Materials,66344.49
-SAILIFE,Healthcare,20026.9
-SAIPARENT,Healthcare,0.0
-SAKAR,Healthcare,1160.71
-SAKHTISUG,Consumer Defensive,189.36
-SAKSOFT,Technology,1642.61
-SAKUMA,Consumer Defensive,329.19
-SALASAR,Basic Materials,1144.45
-SALONA,Consumer Cyclical,145.85
-SALSTEEL,Basic Materials,596.58
-SALZERELEC,Industrials,946.66
-SAMBHAAV,Communication Services,110.65
-SAMBHV,Basic Materials,3328.4
-SAMHI,Consumer Cyclical,3238.9
-SAMMAANCAP,Financial Services,16634.93
-SAMPANN,Basic Materials,134.96
-SANATHAN,Consumer Cyclical,3726.02
-SANCO,Industrials,2.34
-SANDESH,Communication Services,679.92
-SANDHAR,Consumer Cyclical,2850.3
-SANDUMA,Basic Materials,8953.83
-SANGAMIND,Consumer Cyclical,2193.88
-SANGHIIND,Basic Materials,1288.79
-SANGHVIMOV,Industrials,2411.51
-SANGINITA,Basic Materials,52.55
-SANOFI,Healthcare,7796.38
-SANOFICONR,Healthcare,10448.91
-SANSERA,Consumer Cyclical,13405.13
-SANSTAR,Basic Materials,1422.6
-SAPPHIRE,Consumer Cyclical,5101.47
-SARDAEN,Basic Materials,18609.26
-SAREGAMA,Communication Services,5976.48
-SARLAPOLY,Consumer Cyclical,651.82
-SARVESHWAR,Consumer Defensive,428.97
-SASKEN,Technology,1841.97
-SASTASUNDR,Healthcare,853.72
-SATIA,Basic Materials,608.9
-SATIN,Financial Services,1615.06
-SAURASHCEM,Basic Materials,609.26
-SBC,Industrials,1506.67
-SBCL,Industrials,2470.93
-SBFC,Financial Services,9332.15
-SBGLP,Real Estate,433.31
-SBICARD,Financial Services,60869.12
-SBILIFE,Financial Services,184709.38
-SBIN,Financial Services,951122.81
-SCHAEFFLER,Consumer Cyclical,57932.39
-SCHAND,Communication Services,524.0
-SCHNEIDER,Industrials,22175.7
-SCI,Industrials,10866.16
-SCILAL,Real Estate,1925.61
-SCODATUBES,Basic Materials,814.94
-SCPL,Consumer Defensive,335.33
-SDBL,Consumer Defensive,1480.67
-SEAMECLTD,Industrials,3923.55
-SECMARK,Industrials,120.45
-SECURKLOUD,Technology,70.46
-SEDEMAC,Consumer Cyclical,7530.42
-SEJALLTD,Industrials,544.3
-SELMC,Consumer Cyclical,98.68
-SEMAC,Industrials,75.39
-SENCO,Consumer Cyclical,5175.93
-SENORES,Healthcare,3556.72
-SEPC,Industrials,1136.84
-SERVOTECH,Industrials,1596.05
-SESHAPAPER,Basic Materials,1627.26
-SETCO,Consumer Cyclical,318.77
-SETL,Industrials,2526.96
-SETUINFRA,Industrials,5.28
-SEYAIND,Basic Materials,32.02
-SFL,Consumer Cyclical,5442.61
-SGFIN,Financial Services,2948.44
-SGIL,Industrials,754.9
-SGL,Consumer Cyclical,36.2
-SGMART,Industrials,6334.27
-SHADOWFAX,Industrials,6885.94
-SHAH,Basic Materials,438.18
-SHAHALLOYS,Basic Materials,120.82
-SHAILY,Basic Materials,9633.46
-SHAKTIPUMP,Industrials,6259.98
-SHALBY,Healthcare,1559.77
-SHALPAINTS,Basic Materials,385.99
-SHANKARA,Consumer Cyclical,302.56
-SHANTI,Consumer Defensive,7.79
-SHANTIGEAR,Industrials,3507.42
-SHANTIGOLD,Consumer Cyclical,1247.69
-SHARDACROP,Basic Materials,8820.41
-SHARDAMOTR,Consumer Cyclical,4362.41
-SHAREINDIA,Financial Services,2897.91
-SHEKHAWATI,Consumer Cyclical,37.3
-SHEMAROO,Communication Services,256.53
-SHILCTECH,Industrials,4685.68
-SHILPAMED,Healthcare,7655.29
-SHIVALIK,Basic Materials,391.8
-SHIVAMAUTO,Consumer Cyclical,227.44
-SHIVAMILLS,Consumer Cyclical,42.32
-SHIVATEX,Consumer Cyclical,189.56
-SHIVAUM,Basic Materials,446.09
-SHK,Basic Materials,1709.22
-SHOPERSTOP,Consumer Cyclical,3162.02
-SHRADHA,Real Estate,189.33
-SHREDIGCEM,Basic Materials,1006.55
-SHREECEM,Basic Materials,84248.55
-SHREEJISPG,Industrials,5567.73
-SHREEPUSHK,Basic Materials,1076.36
-SHREERAMA,Consumer Cyclical,640.83
-SHRENIK,Basic Materials,24.48
-SHREYANIND,Basic Materials,211.36
-SHRINGARMS,Consumer Cyclical,1745.81
-SHRIPISTON,Consumer Cyclical,13110.99
-SHRIRAMFIN,Financial Services,175104.42
-SHRIRAMPPS,Real Estate,1169.41
-SHYAMCENT,Basic Materials,94.63
-SHYAMMETL,Basic Materials,22866.2
-SHYAMTEL,Technology,10.93
-SICALLOG,Industrials,518.64
-SIEMENS,Industrials,109524.86
-SIGACHI,Healthcare,733.99
-SIGIND,Industrials,137.58
-SIGMA,Technology,414.14
-SIGMAADV,Industrials,2849.54
-SIGNATURE,Real Estate,10895.2
-SIGNPOST,Communication Services,1242.87
-SIKKO,Basic Materials,197.43
-SIL,Consumer Cyclical,90.7
-SILGO,Consumer Cyclical,193.61
-SILINV,Financial Services,429.45
-SILLYMONKS,Communication Services,15.32
-SILVERTUC,Technology,1565.6
-SIMBHALS,Consumer Defensive,33.28
-SIMPLEXINF,Industrials,1356.72
-SINCLAIR,Consumer Cyclical,391.06
-SINDHUTRAD,Industrials,3419.39
-SINGERIND,,0.0
-SINTERCOM,Consumer Cyclical,196.52
-SIRCA,Basic Materials,2289.55
-SIS,Industrials,4073.65
-SITINET,Communication Services,35.8
-SIYSIL,Consumer Cyclical,2322.27
-SJS,Consumer Cyclical,5149.56
-SJVN,Utilities,26537.91
-SKFINDIA,Industrials,7579.33
-SKFINDUS,Industrials,10984.13
-SKIPPER,Industrials,4070.26
-SKMEGGPROD,Consumer Defensive,864.91
-SKYGOLD,Consumer Cyclical,5719.49
-SMARTLINK,Technology,119.37
-SMARTWORKS,Real Estate,4375.09
-SMCGLOBAL,Financial Services,1254.72
-SMLMAH,Consumer Cyclical,5739.45
-SMLT,Industrials,92.05
-SMSPHARMA,Healthcare,3652.9
-SNOWMAN,Industrials,604.98
-SOBHA,Real Estate,13136.22
-SOFTTECH,Technology,399.73
-SOLARA,Healthcare,2259.97
-SOLARINDS,Basic Materials,121310.96
-SOLARWORLD,Technology,1461.39
-SOLEX,Technology,1139.93
-SOMANYCERA,Industrials,1627.39
-SOMATEX,Consumer Cyclical,333.46
-SOMICONVEY,Industrials,121.41
-SONACOMS,Consumer Cyclical,32034.45
-SONAMLTD,Consumer Cyclical,211.49
-SONATSOFTW,Technology,6550.27
-SOTL,Basic Materials,2191.19
-SOUTHBANK,Financial Services,9671.91
-SOUTHWEST,Energy,656.91
-SPAL,Consumer Cyclical,1861.46
-SPANDANA,Financial Services,1802.4
-SPARC,Healthcare,4101.3
-SPCENET,Financial Services,194.25
-SPECIALITY,Consumer Cyclical,462.57
-SPECTRUM,Industrials,2100.47
-SPENCERS,Consumer Cyclical,264.34
-SPIC,Basic Materials,1273.57
-SPLIL,Consumer Cyclical,76.82
-SPLPETRO,Basic Materials,13586.93
-SPMLINFRA,Industrials,1359.83
-SPORTKING,Consumer Cyclical,1663.94
-SRD,Basic Materials,277.74
-SREEL,Consumer Cyclical,427.34
-SRF,Industrials,71023.39
-SRGHFL,Financial Services,412.02
-SRHHYPOLTD,Basic Materials,750.62
-SRM,Industrials,957.64
-SRTL,Consumer Cyclical,184.12
-SSDL,Consumer Cyclical,231.9
-SSWL,Consumer Cyclical,3007.3
-STALLION,Basic Materials,1409.4
-STANLEY,Consumer Cyclical,730.52
-STAR,Healthcare,9162.89
-STARCEMENT,Basic Materials,8472.83
-STARHEALTH,Financial Services,27119.37
-STARPAPER,Basic Materials,206.76
-STARTECK,Financial Services,242.49
-STCINDIA,Industrials,647.58
-STEELCAS,Basic Materials,2469.2
-STEELCITY,Financial Services,122.32
-STEELXIND,Basic Materials,1022.72
-STEL,Financial Services,881.34
-STERTOOLS,Industrials,779.41
-STLNETWORK,Communication Services,914.57
-STLTECH,Technology,9271.1
-STOVEKRAFT,Consumer Cyclical,1609.68
-STUDDS,Consumer Cyclical,1753.0
-STYL,Technology,3803.08
-STYLAMIND,Consumer Cyclical,3758.74
-STYLEBAAZA,Consumer Cyclical,2121.74
-STYRENIX,Basic Materials,3344.71
-SUBEXLTD,Technology,451.1
-SUBROS,Consumer Cyclical,4498.66
-SUDARCOLOR,Basic Materials,734.46
-SUDARSCHEM,Basic Materials,6057.44
-SUDEEPPHRM,Healthcare,6802.9
-SUKHJITS,Basic Materials,522.18
-SULA,Consumer Defensive,1322.85
-SUMEETINDS,Consumer Cyclical,1557.4
-SUMICHEM,Basic Materials,19628.91
-SUMIT,Real Estate,222.31
-SUMMITSEC,Financial Services,1699.16
-SUNCLAY,Industrials,2762.16
-SUNDARAM,Basic Materials,61.6
-SUNDARMFIN,Financial Services,51506.96
-SUNDRMBRAK,Consumer Cyclical,212.12
-SUNDRMFAST,Consumer Cyclical,15760.68
-SUNDROP,Consumer Defensive,2300.83
-SUNFLAG,Basic Materials,4189.56
-SUNPHARMA,Healthcare,412205.74
-SUNTECK,Real Estate,4417.74
-SUNTV,Communication Services,23249.02
-SUPERHOUSE,Consumer Cyclical,160.31
-SUPERSPIN,Consumer Cyclical,25.6
-SUPRAJIT,Consumer Cyclical,5736.5
-SUPREME,Real Estate,210.93
-SUPREMEENG,Basic Materials,25.49
-SUPREMEIND,Industrials,47940.33
-SUPREMEINF,Industrials,172.74
-SUPRIYA,Healthcare,4915.08
-SURAJEST,Real Estate,915.48
-SURAJLTD,Basic Materials,471.33
-SURAKSHA,Healthcare,1320.2
-SURANASOL,Technology,110.27
-SURANAT&P,Utilities,245.76
-SURYALAXMI,Consumer Cyclical,104.68
-SURYAROSNI,Basic Materials,4536.59
-SURYODAY,Financial Services,1362.75
-SUTLEJTEX,Consumer Cyclical,477.97
-SUVEN,Healthcare,4400.71
-SUVIDHAA,Technology,55.11
-SUYOG,Communication Services,788.97
-SUZLON,Industrials,56985.11
-SVLL,Industrials,656.12
-SVPGLOB,Consumer Cyclical,31.25
-SWANCORP,Industrials,9867.62
-SWANDEF,Industrials,9358.46
-SWARAJENG,Consumer Cyclical,4457.6
-SWELECTES,Technology,815.73
-SWIGGY,Consumer Cyclical,69923.35
-SWSOLAR,Technology,3865.48
-SYMPHONY,Consumer Cyclical,4938.5
-SYNCOMF,Healthcare,1152.31
-SYNGENE,Healthcare,15711.71
-SYRMA,Technology,15579.0
-SYSTMTXC,Financial Services,862.19
-TAINWALCHM,Basic Materials,167.74
-TAJGVK,Consumer Cyclical,2004.57
-TAKE,Healthcare,626.87
-TALBROAUTO,Consumer Cyclical,1538.27
-TANLA,Technology,5631.92
-TARACHAND,Industrials,456.55
-TARAPUR,Industrials,44.95
-TARC,Real Estate,3386.82
-TARIL,Industrials,8057.95
-TARMAT,Industrials,135.57
-TARSONS,Healthcare,1018.69
-TASTYBITE,Consumer Defensive,1743.47
-TATACAP,Financial Services,130063.37
-TATACHEM,Basic Materials,15884.05
-TATACOMM,Communication Services,39854.4
-TATACONSUM,Consumer Defensive,105106.01
-TATAELXSI,Technology,27146.4
-TATAINVEST,Financial Services,30023.25
-TATAPOWER,Utilities,123883.32
-TATASTEEL,Basic Materials,247104.72
-TATATECH,Technology,22270.0
-TATVA,Basic Materials,2679.44
-TBOTEK,Consumer Cyclical,11534.78
-TBZ,Consumer Cyclical,884.58
-TCC,,0.0
-TCI,Industrials,7464.49
-TCIEXP,Industrials,1969.36
-TCIFINANCE,Financial Services,18.7
-TCPLPACK,Consumer Cyclical,2177.38
-TCS,Technology,918921.88
-TDPOWERSYS,Industrials,13750.81
-TEAMGTY,Financial Services,239.16
-TEAMLEASE,Industrials,2008.17
-TECHM,Technology,130553.2
-TECHNOE,Industrials,12161.45
-TECILCHEM,Financial Services,22.91
-TEGA,Industrials,12686.06
-TEJASNET,Technology,7427.94
-TEMBO,Industrials,747.6
-TENNIND,Consumer Cyclical,0.0
-TERASOFT,Technology,403.95
-TEXINFRA,Real Estate,1258.85
-TEXMOPIPES,Industrials,114.77
-TEXRAIL,Industrials,3687.41
-TFCILTD,Financial Services,2996.85
-TFL,Financial Services,65.48
-TGBHOTELS,Consumer Cyclical,25.18
-THANGAMAYL,Consumer Cyclical,12021.76
-THEINVEST,Financial Services,524.04
-THEJO,Industrials,1696.52
-THELEELA,Consumer Cyclical,13829.2
-THEMISMED,Healthcare,723.35
-THERMAX,Industrials,36202.95
-THOMASCOOK,Consumer Cyclical,4514.59
-THOMASCOTT,Consumer Cyclical,364.71
-THYROCARE,Healthcare,6028.11
-TI,Consumer Defensive,10297.14
-TICL,Industrials,378.54
-TIGERLOGS,Industrials,280.57
-TIIL,Industrials,5111.58
-TIINDIA,Industrials,50093.3
-TIJARIA,Industrials,12.45
-TIL,Industrials,1188.55
-TIMETECHNO,Consumer Cyclical,8215.08
-TIMKEN,Industrials,24705.76
-TINNARUBR,Basic Materials,1104.37
-TIPSFILMS,Communication Services,138.29
-TIPSMUSIC,Communication Services,6922.08
-TIRUMALCHM,Basic Materials,2087.97
-TIRUPATIFL,Industrials,504.23
-TITAGARH,Industrials,9363.19
-TITAN,Consumer Cyclical,375273.37
-TMB,Financial Services,9699.82
-TMCV,Consumer Cyclical,145838.73
-TMPV,Consumer Cyclical,113675.0
-TNPETRO,Basic Materials,779.62
-TNPL,Basic Materials,912.2
-TNTELE,Technology,40.43
-TOKYOPLAST,Consumer Cyclical,66.55
-TOLINS,Consumer Cyclical,384.86
-TORNTPHARM,Healthcare,137114.41
-TORNTPOWER,Utilities,70521.3
-TOTAL,Industrials,82.89
-TOUCHWOOD,Communication Services,79.26
-TPHQ,Industrials,57.0
-TPLPLASTEH,Consumer Cyclical,470.71
-TRACXN,Technology,337.1
-TRANSRAILL,Industrials,6802.08
-TRANSWORLD,Industrials,300.8
-TRAVELFOOD,Consumer Cyclical,16857.61
-TREEHOUSE,Consumer Defensive,32.66
-TREJHARA,Technology,348.68
-TREL,Real Estate,605.64
-TRENT,Consumer Cyclical,135902.86
-TRF,Industrials,269.29
-TRIDENT,Consumer Cyclical,12278.35
-TRIGYN,Technology,147.29
-TRITURBINE,Industrials,14523.03
-TRIVENI,Consumer Defensive,8526.06
-TRU,Financial Services,67.03
-TRUALT,Energy,3593.59
-TSFINV,Financial Services,7697.73
-TTKHLTCARE,Healthcare,1151.48
-TTKPRESTIG,Consumer Cyclical,6444.91
-TTL,Consumer Cyclical,222.15
-TTML,Communication Services,7427.81
-TVSELECT,Technology,732.01
-TVSHLTD,Consumer Cyclical,27798.91
-TVSMOTOR,Consumer Cyclical,164932.03
-TVSSCS,Industrials,4418.86
-TVSSRICHAK,Consumer Cyclical,2691.08
-TVTODAY,Communication Services,621.15
-TVVISION,Communication Services,21.35
-UBL,Consumer Defensive,38790.88
-UCAL,Consumer Cyclical,202.91
-UCOBANK,Financial Services,30529.46
-UDS,Industrials,978.93
-UEL,Technology,1971.19
-UFBL,Consumer Cyclical,870.61
-UFLEX,Consumer Cyclical,2511.96
-UFO,Communication Services,251.4
-UGARSUGAR,Consumer Defensive,445.84
-UGROCAP,Financial Services,1420.13
-UJJIVANSFB,Financial Services,10969.41
-ULTRACEMCO,Basic Materials,321708.57
-UMAEXPORTS,Consumer Defensive,87.5
-UMESLTD,Consumer Defensive,18.39
-UMIYA-MRO,Real Estate,150.95
-UNICHEMLAB,Healthcare,2210.04
-UNIDT,Energy,413.03
-UNIECOM,Technology,1014.32
-UNIENTER,Basic Materials,678.96
-UNIINFO,Communication Services,11.9
-UNIMECH,Industrials,3784.52
-UNIONBANK,Financial Services,131240.56
-UNIPARTS,Industrials,2223.72
-UNITDSPR,Consumer Defensive,90059.54
-UNITECH,Real Estate,1235.13
-UNITEDPOLY,Consumer Cyclical,613.95
-UNITEDTEA,Consumer Defensive,255.7
-UNIVASTU,Industrials,228.16
-UNIVCABLES,Industrials,2417.23
-UNIVPHOTO,Healthcare,415.31
-UNOMINDA,Consumer Cyclical,59062.97
-UPL,Basic Materials,51355.24
-URAVIDEF,Consumer Cyclical,155.96
-URBANCO,Technology,18839.28
-URJA,Technology,517.64
-USHAMART,Basic Materials,12364.51
-USK,Industrials,110.99
-UTIAMC,Financial Services,11995.66
-UTKARSHBNK,Financial Services,2121.19
-UTLSOLAR,Technology,6832.04
-UTTAMSUGAR,Consumer Defensive,947.05
-UYFINCORP,Financial Services,251.88
-V2RETAIL,Consumer Cyclical,6965.63
-VADILALIND,Consumer Defensive,3139.07
-VAIBHAVGBL,Consumer Cyclical,3218.27
-VAISHALI,Healthcare,77.62
-VAKRANGEE,Technology,661.83
-VALIANTLAB,Healthcare,321.37
-VALIANTORG,Basic Materials,734.97
-VARDHACRLC,Consumer Cyclical,273.0
-VARDMNPOLY,Consumer Cyclical,338.11
-VARROC,Consumer Cyclical,7229.7
-VASCONEQ,Industrials,762.82
-VASWANI,Basic Materials,178.89
-VBL,Consumer Defensive,135571.26
-VCL,Consumer Cyclical,26.46
-VEDL,Basic Materials,278750.27
-VEEDOL,Basic Materials,2255.56
-VENKEYS,Consumer Defensive,1922.64
-VENTIVE,Consumer Cyclical,13409.96
-VENUSPIPES,Basic Materials,2187.58
-VENUSREM,Healthcare,1224.98
-VERANDA,Consumer Defensive,1328.39
-VERTOZ,Technology,325.32
-VESUVIUS,Industrials,9191.62
-VETO,Industrials,185.51
-VGL,Consumer Cyclical,308.5
-VGUARD,Industrials,13963.44
-VHL,Financial Services,1037.9
-VHLTD,Consumer Cyclical,937.51
-VIDHIING,Basic Materials,1626.66
-VIDYAWIRES,Industrials,1138.12
-VIJAYA,Healthcare,9557.56
-VIJIFIN,Financial Services,46.94
-VIKASECO,Basic Materials,188.82
-VIKASLIFE,Consumer Defensive,276.2
-VIKRAMSOLR,Technology,6735.36
-VIKRAN,Industrials,1543.6
-VIMTALABS,Healthcare,1880.21
-VINATIORGA,Basic Materials,13381.51
-VINCOFE,Consumer Defensive,1982.09
-VINDHYATEL,Industrials,1302.59
-VINEETLAB,Basic Materials,59.9
-VINNY,Consumer Cyclical,51.64
-VINYLINDIA,Basic Materials,382.34
-VIPCLOTHNG,Consumer Cyclical,210.65
-VIPIND,Consumer Cyclical,4458.24
-VIPULLTD,Real Estate,144.7
-VIRINCHI,Technology,179.46
-VISAKAIND,Industrials,514.8
-VISASTEEL,Basic Materials,411.01
-VISHNU,Basic Materials,3474.48
-VISHWARAJ,Consumer Defensive,109.67
-VITAL,Basic Materials,124.98
-VIVIDHA,Consumer Cyclical,16.39
-VIVIMEDLAB,Healthcare,52.82
-VIYASH,Healthcare,8486.93
-VLEGOV,Technology,130.26
-VLSFINANCE,Financial Services,690.77
-VMART,Consumer Cyclical,5008.8
-VMM,Consumer Cyclical,52583.16
-VMSTMT,Basic Materials,199.72
-VOLTAMP,Industrials,9086.69
-VOLTAS,Consumer Cyclical,40374.55
-VPRPL,Industrials,461.77
-VRAJ,Basic Materials,372.18
-VRLLOG,Industrials,4123.44
-VSSL,Basic Materials,2213.21
-VSTIND,Consumer Defensive,3612.47
-VSTL,Basic Materials,212.04
-VSTTILLERS,Industrials,4337.19
-VTL,Consumer Cyclical,15825.62
-WAAREEENER,Technology,88705.92
-WAAREEINDO,Technology,1721.98
-WAAREERTL,Utilities,8939.3
-WABAG,Industrials,7856.62
-WAKEFIT,Consumer Cyclical,4813.89
-WALCHANNAG,Industrials,1061.64
-WANBURY,Healthcare,782.96
-WCIL,Industrials,880.59
-WEALTH,Financial Services,900.56
-WEBELSOLAR,Technology,3293.45
-WEIZMANIND,Consumer Cyclical,113.11
-WEL,Consumer Cyclical,1041.11
-WELCORP,Basic Materials,23183.53
-WELENT,Industrials,6008.86
-WELINV,Financial Services,475.0
-WELSPUNLIV,Consumer Cyclical,11413.24
-WENDT,Industrials,1280.8
-WESTLIFE,Consumer Cyclical,6941.25
-WEWIN,Technology,46.4
-WEWORK,Real Estate,6125.18
-WHEELS,Consumer Cyclical,2346.42
-WHIRLPOOL,Consumer Cyclical,10422.7
-WILLAMAGOR,Financial Services,27.6
-WINDLAS,Healthcare,1624.63
-WINDMACHIN,Industrials,2143.56
-WINSOME,Consumer Cyclical,11.97
-WIPL,Basic Materials,127.9
-WIPRO,Technology,214651.99
-WOCKPHARMA,Healthcare,21084.98
-WONDERLA,Consumer Cyclical,3341.43
-WORTHPERI,Consumer Cyclical,198.59
-WSI,Industrials,577.64
-WSTCSTPAPR,Basic Materials,2941.49
-XCHANGING,Technology,637.34
-XELPMOC,Technology,150.42
-XPROINDIA,Basic Materials,2397.9
-XTGLOBAL,Technology,383.33
-YASHO,Basic Materials,1752.76
-YATHARTH,Healthcare,6500.55
-YATRA,Consumer Cyclical,1535.27
-YESBANK,Financial Services,56891.5
-YUKEN,Industrials,849.0
-ZAGGLE,Technology,3103.36
-ZEEL,Communication Services,7066.54
-ZEELEARN,Consumer Defensive,164.2
-ZEEMEDIA,Communication Services,452.81
-ZENITHEXPO,Consumer Cyclical,101.68
-ZENITHSTL,Basic Materials,68.71
-ZENSARTECH,Technology,12423.9
-ZENTEC,Industrials,12809.05
-ZFCVINDIA,Consumer Cyclical,25888.85
-ZIMLAB,Healthcare,368.33
-ZODIAC,,0.0
-ZODIACLOTH,Consumer Cyclical,188.03
-ZOTA,Healthcare,3464.29
-ZUARI,Basic Materials,868.59
-ZUARIIND,Industrials,704.5
-ZYDUSLIFE,Healthcare,87923.38
-ZYDUSWELL,Consumer Defensive,15864.16
+PWL,Other,0.0
+PYRAMID,Other,0.0
+QPOWER,Other,0.0
+QUADFUTURE,Other,0.0
+QUESS,Other,0.0
+QUICKHEAL,Other,0.0
+RACE,Other,0.0
+RACLGEAR,Other,0.0
+RADAAN,Other,0.0
+RADHIKAJWE,Other,0.0
+RADIANTCMS,Other,0.0
+RADICO,Other,0.0
+RADIOCITY,Other,0.0
+RAILTEL,Other,0.0
+RAIN,Other,0.0
+RAINBOW,Other,0.0
+RAJESHEXPO,Other,0.0
+RAJMET,Other,0.0
+RAJOOENG,Other,0.0
+RAJRATAN,Other,0.0
+RAJRILTD,Other,0.0
+RAJSREESUG,Other,0.0
+RAJTV,Other,0.0
+RALLIS,Other,0.0
+RAMANEWS,Other,0.0
+RAMAPHO,Other,0.0
+RAMASTEEL,Other,0.0
+RAMCOCEM,Other,0.0
+RAMCOIND,Other,0.0
+RAMCOSYS,Other,0.0
+RAMKY,Other,0.0
+RAMRAT,Other,0.0
+RANASUG,Other,0.0
+RANEHOLDIN,Other,0.0
+RATEGAIN,Other,0.0
+RATNAMANI,Other,0.0
+RATNAVEER,Other,0.0
+RAYMOND,Other,0.0
+RAYMONDLSL,Other,0.0
+RAYMONDREL,Other,0.0
+RBA,Other,0.0
+RBLBANK,Other,0.0
+RBZJEWEL,Other,0.0
+RCF,Other,0.0
+RCOM,Other,0.0
+RECLTD,Other,0.0
+REDINGTON,Other,0.0
+REDTAPE,Other,0.0
+REFEX,Other,0.0
+REGAAL,Other,0.0
+REGENCERAM,Other,0.0
+RELAXO,Other,0.0
+RELCHEMQ,Other,0.0
+RELIABLE,Other,0.0
+RELIANCE,Other,0.0
+RELIGARE,Other,0.0
+RELINFRA,Other,0.0
+RELTD,Other,0.0
+REMSONSIND,Other,0.0
+RENUKA,Other,0.0
+REPCOHOME,Other,0.0
+REPL,Other,0.0
+REPRO,Other,0.0
+RESPONIND,Other,0.0
+RETAIL,Other,0.0
+RGL,Other,0.0
+RHETAN,Other,0.0
+RHIM,Other,0.0
+RHL,Other,0.0
+RICOAUTO,Other,0.0
+RIIL,Other,0.0
+RISHABH,Other,0.0
+RITCO,Other,0.0
+RITES,Other,0.0
+RKDL,Other,0.0
+RKEC,Other,0.0
+RKFORGE,Other,0.0
+RKSWAMY,Other,0.0
+RMC,Other,0.0
+RMDRIP,Other,0.0
+RML,Other,0.0
+RNBDENIMS,Other,0.0
+ROHLTD,Other,0.0
+ROLEXRINGS,Other,0.0
+ROLLT,Other,0.0
+ROML,Other,0.0
+ROSSARI,Other,0.0
+ROSSELLIND,Other,0.0
+ROSSTECH,Other,0.0
+ROTO,Other,0.0
+ROUTE,Other,0.0
+RPEL,Other,0.0
+RPGLIFE,Other,0.0
+RPOWER,Other,0.0
+RPPINFRA,Other,0.0
+RPPL,Other,0.0
+RPSGVENT,Other,0.0
+RPTECH,Other,0.0
+RRKABEL,Other,0.0
+RSL,Other,0.0
+RSSOFTWARE,Other,0.0
+RSWM,Other,0.0
+RSYSTEMS,Other,0.0
+RTNINDIA,Other,0.0
+RTNPOWER,Other,0.0
+RUBFILA,Other,0.0
+RUBICON,Other,0.0
+RUBYMILLS,Other,0.0
+RUCHINFRA,Other,0.0
+RUCHIRA,Other,0.0
+RUDRA,Other,0.0
+RUPA,Other,0.0
+RUSHIL,Other,0.0
+RUSTOMJEE,Other,0.0
+RVHL,Other,0.0
+RVNL,Other,0.0
+RVTH,Other,0.0
+S&SPOWER,Other,0.0
+SAATVIKGL,Other,0.0
+SABEVENTS,Other,0.0
+SADBHAV,Other,0.0
+SADBHIN,Other,0.0
+SADHNANIQ,Other,0.0
+SAFARI,Other,0.0
+SAGARDEEP,Other,0.0
+SAGCEM,Other,0.0
+SAGILITY,Other,0.0
+SAHYADRI,Other,0.0
+SAIL,Other,0.0
+SAILIFE,Other,0.0
+SAIPARENT,Other,0.0
+SAKAR,Other,0.0
+SAKHTISUG,Other,0.0
+SAKSOFT,Other,0.0
+SAKUMA,Other,0.0
+SALASAR,Other,0.0
+SALONA,Other,0.0
+SALSTEEL,Other,0.0
+SALZERELEC,Other,0.0
+SAMBHAAV,Other,0.0
+SAMBHV,Other,0.0
+SAMHI,Other,0.0
+SAMMAANCAP,Other,0.0
+SAMPANN,Other,0.0
+SANATHAN,Other,0.0
+SANCO,Other,0.0
+SANDESH,Other,0.0
+SANDHAR,Other,0.0
+SANDUMA,Other,0.0
+SANGAMIND,Other,0.0
+SANGHIIND,Other,0.0
+SANGHVIMOV,Other,0.0
+SANGINITA,Other,0.0
+SANOFI,Other,0.0
+SANOFICONR,Other,0.0
+SANSERA,Other,0.0
+SANSTAR,Other,0.0
+SAPPHIRE,Other,0.0
+SARDAEN,Other,0.0
+SAREGAMA,Other,0.0
+SARLAPOLY,Other,0.0
+SARVESHWAR,Other,0.0
+SASKEN,Other,0.0
+SASTASUNDR,Other,0.0
+SATIA,Other,0.0
+SATIN,Other,0.0
+SAURASHCEM,Other,0.0
+SBC,Other,0.0
+SBCL,Other,0.0
+SBFC,Other,0.0
+SBGLP,Other,0.0
+SBICARD,Other,0.0
+SBILIFE,Other,0.0
+SBIN,Other,0.0
+SCHAEFFLER,Other,0.0
+SCHAND,Other,0.0
+SCHNEIDER,Other,0.0
+SCI,Other,0.0
+SCILAL,Other,0.0
+SCODATUBES,Other,0.0
+SCPL,Other,0.0
+SDBL,Other,0.0
+SEAMECLTD,Other,0.0
+SECMARK,Other,0.0
+SECURKLOUD,Other,0.0
+SEDEMAC,Other,0.0
+SEJALLTD,Other,0.0
+SELMC,Other,0.0
+SEMAC,Other,0.0
+SENCO,Other,0.0
+SENORES,Other,0.0
+SEPC,Other,0.0
+SERVOTECH,Other,0.0
+SESHAPAPER,Other,0.0
+SETCO,Other,0.0
+SETL,Other,0.0
+SETUINFRA,Other,0.0
+SEYAIND,Other,0.0
+SFL,Other,0.0
+SGFIN,Other,0.0
+SGIL,Other,0.0
+SGL,Other,0.0
+SGMART,Other,0.0
+SHADOWFAX,Other,0.0
+SHAH,Other,0.0
+SHAHALLOYS,Other,0.0
+SHAILY,Other,0.0
+SHAKTIPUMP,Other,0.0
+SHALBY,Other,0.0
+SHALPAINTS,Other,0.0
+SHANKARA,Other,0.0
+SHANTI,Other,0.0
+SHANTIGEAR,Other,0.0
+SHANTIGOLD,Other,0.0
+SHARDACROP,Other,0.0
+SHARDAMOTR,Other,0.0
+SHAREINDIA,Other,0.0
+SHEKHAWATI,Other,0.0
+SHEMAROO,Other,0.0
+SHILCTECH,Other,0.0
+SHILPAMED,Other,0.0
+SHIVALIK,Other,0.0
+SHIVAMAUTO,Other,0.0
+SHIVAMILLS,Other,0.0
+SHIVATEX,Other,0.0
+SHIVAUM,Other,0.0
+SHK,Other,0.0
+SHOPERSTOP,Other,0.0
+SHRADHA,Other,0.0
+SHREDIGCEM,Other,0.0
+SHREECEM,Other,0.0
+SHREEJISPG,Other,0.0
+SHREEPUSHK,Other,0.0
+SHREERAMA,Other,0.0
+SHRENIK,Other,0.0
+SHREYANIND,Other,0.0
+SHRINGARMS,Other,0.0
+SHRIPISTON,Other,0.0
+SHRIRAMFIN,Other,0.0
+SHRIRAMPPS,Other,0.0
+SHYAMCENT,Other,0.0
+SHYAMMETL,Other,0.0
+SHYAMTEL,Other,0.0
+SICALLOG,Other,0.0
+SIEMENS,Other,0.0
+SIGACHI,Other,0.0
+SIGIND,Other,0.0
+SIGMA,Other,0.0
+SIGMAADV,Other,0.0
+SIGNATURE,Other,0.0
+SIGNPOST,Other,0.0
+SIKKO,Other,0.0
+SIL,Other,0.0
+SILGO,Other,0.0
+SILINV,Other,0.0
+SILLYMONKS,Other,0.0
+SILVERTUC,Other,0.0
+SIMBHALS,Other,0.0
+SIMPLEXINF,Other,0.0
+SINCLAIR,Other,0.0
+SINDHUTRAD,Other,0.0
+SINGERIND,Other,0.0
+SINTERCOM,Other,0.0
+SIRCA,Other,0.0
+SIS,Other,0.0
+SITINET,Other,0.0
+SIYSIL,Other,0.0
+SJS,Other,0.0
+SJVN,Other,0.0
+SKFINDIA,Other,0.0
+SKFINDUS,Other,0.0
+SKIPPER,Other,0.0
+SKMEGGPROD,Other,0.0
+SKYGOLD,Other,0.0
+SMARTLINK,Other,0.0
+SMARTWORKS,Other,0.0
+SMCGLOBAL,Other,0.0
+SMLMAH,Other,0.0
+SMLT,Other,0.0
+SMSPHARMA,Other,0.0
+SNOWMAN,Other,0.0
+SOBHA,Other,0.0
+SOFTTECH,Other,0.0
+SOLARA,Other,0.0
+SOLARINDS,Other,0.0
+SOLARWORLD,Other,0.0
+SOLEX,Other,0.0
+SOMANYCERA,Other,0.0
+SOMATEX,Other,0.0
+SOMICONVEY,Other,0.0
+SONACOMS,Other,0.0
+SONAMLTD,Other,0.0
+SONATSOFTW,Other,0.0
+SOTL,Other,0.0
+SOUTHBANK,Other,0.0
+SOUTHWEST,Other,0.0
+SPAL,Other,0.0
+SPANDANA,Other,0.0
+SPARC,Other,0.0
+SPCENET,Other,0.0
+SPECIALITY,Other,0.0
+SPECTRUM,Other,0.0
+SPENCERS,Other,0.0
+SPIC,Other,0.0
+SPLIL,Other,0.0
+SPLPETRO,Other,0.0
+SPMLINFRA,Other,0.0
+SPORTKING,Other,0.0
+SRD,Other,0.0
+SREEL,Other,0.0
+SRF,Other,0.0
+SRGHFL,Other,0.0
+SRHHYPOLTD,Other,0.0
+SRM,Other,0.0
+SRTL,Other,0.0
+SSDL,Other,0.0
+SSWL,Other,0.0
+STALLION,Other,0.0
+STANLEY,Other,0.0
+STAR,Other,0.0
+STARCEMENT,Other,0.0
+STARHEALTH,Other,0.0
+STARPAPER,Other,0.0
+STARTECK,Other,0.0
+STCINDIA,Other,0.0
+STEELCAS,Other,0.0
+STEELCITY,Other,0.0
+STEELXIND,Other,0.0
+STEL,Other,0.0
+STERTOOLS,Other,0.0
+STLNETWORK,Other,0.0
+STLTECH,Other,0.0
+STOVEKRAFT,Other,0.0
+STUDDS,Other,0.0
+STYL,Other,0.0
+STYLAMIND,Other,0.0
+STYLEBAAZA,Other,0.0
+STYRENIX,Other,0.0
+SUBEXLTD,Other,0.0
+SUBROS,Other,0.0
+SUDARCOLOR,Other,0.0
+SUDARSCHEM,Other,0.0
+SUDEEPPHRM,Other,0.0
+SUKHJITS,Other,0.0
+SULA,Other,0.0
+SUMEETINDS,Other,0.0
+SUMICHEM,Other,0.0
+SUMIT,Other,0.0
+SUMMITSEC,Other,0.0
+SUNCLAY,Other,0.0
+SUNDARAM,Other,0.0
+SUNDARMFIN,Other,0.0
+SUNDRMBRAK,Other,0.0
+SUNDRMFAST,Other,0.0
+SUNDROP,Other,0.0
+SUNFLAG,Other,0.0
+SUNPHARMA,Other,0.0
+SUNTECK,Other,0.0
+SUNTV,Other,0.0
+SUPERHOUSE,Other,0.0
+SUPERSPIN,Other,0.0
+SUPRAJIT,Other,0.0
+SUPREME,Other,0.0
+SUPREMEENG,Other,0.0
+SUPREMEIND,Other,0.0
+SUPREMEINF,Other,0.0
+SUPRIYA,Other,0.0
+SURAJEST,Other,0.0
+SURAJLTD,Other,0.0
+SURAKSHA,Other,0.0
+SURANASOL,Other,0.0
+SURANAT&P,Other,0.0
+SURYALAXMI,Other,0.0
+SURYAROSNI,Other,0.0
+SURYODAY,Other,0.0
+SUTLEJTEX,Other,0.0
+SUVEN,Other,0.0
+SUVIDHAA,Other,0.0
+SUYOG,Other,0.0
+SUZLON,Other,0.0
+SVLL,Other,0.0
+SVPGLOB,Other,0.0
+SWANCORP,Other,0.0
+SWANDEF,Other,0.0
+SWARAJENG,Other,0.0
+SWELECTES,Other,0.0
+SWIGGY,Other,0.0
+SWSOLAR,Other,0.0
+SYMPHONY,Other,0.0
+SYNCOMF,Other,0.0
+SYNGENE,Other,0.0
+SYRMA,Other,0.0
+SYSTMTXC,Other,0.0
+TAINWALCHM,Other,0.0
+TAJGVK,Other,0.0
+TAKE,Other,0.0
+TALBROAUTO,Other,0.0
+TANLA,Other,0.0
+TARACHAND,Other,0.0
+TARAPUR,Other,0.0
+TARC,Other,0.0
+TARIL,Other,0.0
+TARMAT,Other,0.0
+TARSONS,Other,0.0
+TASTYBITE,Other,0.0
+TATACAP,Other,0.0
+TATACHEM,Other,0.0
+TATACOMM,Other,0.0
+TATACONSUM,Other,0.0
+TATAELXSI,Other,0.0
+TATAINVEST,Other,0.0
+TATAPOWER,Other,0.0
+TATASTEEL,Other,0.0
+TATATECH,Other,0.0
+TATVA,Other,0.0
+TBOTEK,Other,0.0
+TBZ,Other,0.0
+TCC,Other,0.0
+TCI,Other,0.0
+TCIEXP,Other,0.0
+TCIFINANCE,Other,0.0
+TCPLPACK,Other,0.0
+TCS,Other,0.0
+TDPOWERSYS,Other,0.0
+TEAMGTY,Other,0.0
+TEAMLEASE,Other,0.0
+TECHM,Other,0.0
+TECHNOE,Other,0.0
+TECILCHEM,Other,0.0
+TEGA,Other,0.0
+TEJASNET,Other,0.0
+TEMBO,Other,0.0
+TENNIND,Other,0.0
+TERASOFT,Other,0.0
+TEXINFRA,Other,0.0
+TEXMOPIPES,Other,0.0
+TEXRAIL,Other,0.0
+TFCILTD,Other,0.0
+TFL,Other,0.0
+TGBHOTELS,Other,0.0
+THANGAMAYL,Other,0.0
+THEINVEST,Other,0.0
+THEJO,Other,0.0
+THELEELA,Other,0.0
+THEMISMED,Other,0.0
+THERMAX,Other,0.0
+THOMASCOOK,Other,0.0
+THOMASCOTT,Other,0.0
+THYROCARE,Other,0.0
+TI,Other,0.0
+TICL,Other,0.0
+TIGERLOGS,Other,0.0
+TIIL,Other,0.0
+TIINDIA,Other,0.0
+TIJARIA,Other,0.0
+TIL,Other,0.0
+TIMETECHNO,Other,0.0
+TIMKEN,Other,0.0
+TINNARUBR,Other,0.0
+TIPSFILMS,Other,0.0
+TIPSMUSIC,Other,0.0
+TIRUMALCHM,Other,0.0
+TIRUPATIFL,Other,0.0
+TITAGARH,Other,0.0
+TITAN,Other,0.0
+TMB,Other,0.0
+TMCV,Other,0.0
+TMPV,Other,0.0
+TNPETRO,Other,0.0
+TNPL,Other,0.0
+TNTELE,Other,0.0
+TOKYOPLAST,Other,0.0
+TOLINS,Other,0.0
+TORNTPHARM,Other,0.0
+TORNTPOWER,Other,0.0
+TOTAL,Other,0.0
+TOUCHWOOD,Other,0.0
+TPHQ,Other,0.0
+TPLPLASTEH,Other,0.0
+TRACXN,Other,0.0
+TRANSRAILL,Other,0.0
+TRANSWORLD,Other,0.0
+TRAVELFOOD,Other,0.0
+TREEHOUSE,Other,0.0
+TREJHARA,Other,0.0
+TREL,Other,0.0
+TRENT,Other,0.0
+TRF,Other,0.0
+TRIDENT,Other,0.0
+TRIGYN,Other,0.0
+TRITURBINE,Other,0.0
+TRIVENI,Other,0.0
+TRU,Other,0.0
+TRUALT,Other,0.0
+TSFINV,Other,0.0
+TTKHLTCARE,Other,0.0
+TTKPRESTIG,Other,0.0
+TTL,Other,0.0
+TTML,Other,0.0
+TVSELECT,Other,0.0
+TVSHLTD,Other,0.0
+TVSMOTOR,Other,0.0
+TVSSCS,Other,0.0
+TVSSRICHAK,Other,0.0
+TVTODAY,Other,0.0
+TVVISION,Other,0.0
+UBL,Other,0.0
+UCAL,Other,0.0
+UCOBANK,Other,0.0
+UDS,Other,0.0
+UEL,Other,0.0
+UFBL,Other,0.0
+UFLEX,Other,0.0
+UFO,Other,0.0
+UGARSUGAR,Other,0.0
+UGROCAP,Other,0.0
+UJJIVANSFB,Other,0.0
+ULTRACEMCO,Other,0.0
+UMAEXPORTS,Other,0.0
+UMESLTD,Other,0.0
+UMIYA-MRO,Other,0.0
+UNICHEMLAB,Other,0.0
+UNIDT,Other,0.0
+UNIECOM,Other,0.0
+UNIENTER,Other,0.0
+UNIINFO,Other,0.0
+UNIMECH,Other,0.0
+UNIONBANK,Other,0.0
+UNIPARTS,Other,0.0
+UNITDSPR,Other,0.0
+UNITECH,Other,0.0
+UNITEDPOLY,Other,0.0
+UNITEDTEA,Other,0.0
+UNIVASTU,Other,0.0
+UNIVCABLES,Other,0.0
+UNIVPHOTO,Other,0.0
+UNOMINDA,Other,0.0
+UPL,Other,0.0
+URAVIDEF,Other,0.0
+URBANCO,Other,0.0
+URJA,Other,0.0
+USHAMART,Other,0.0
+USK,Other,0.0
+UTIAMC,Other,0.0
+UTKARSHBNK,Other,0.0
+UTLSOLAR,Other,0.0
+UTTAMSUGAR,Other,0.0
+UYFINCORP,Other,0.0
+V2RETAIL,Other,0.0
+VADILALIND,Other,0.0
+VAIBHAVGBL,Other,0.0
+VAISHALI,Other,0.0
+VAKRANGEE,Other,0.0
+VALIANTLAB,Other,0.0
+VALIANTORG,Other,0.0
+VARDHACRLC,Other,0.0
+VARDMNPOLY,Other,0.0
+VARROC,Other,0.0
+VASCONEQ,Other,0.0
+VASWANI,Other,0.0
+VBL,Other,0.0
+VCL,Other,0.0
+VEDL,Other,0.0
+VEEDOL,Other,0.0
+VENKEYS,Other,0.0
+VENTIVE,Other,0.0
+VENUSPIPES,Other,0.0
+VENUSREM,Other,0.0
+VERANDA,Other,0.0
+VERTOZ,Other,0.0
+VESUVIUS,Other,0.0
+VETO,Other,0.0
+VGL,Other,0.0
+VGUARD,Other,0.0
+VHL,Other,0.0
+VHLTD,Other,0.0
+VIDHIING,Other,0.0
+VIDYAWIRES,Other,0.0
+VIJAYA,Other,0.0
+VIJIFIN,Other,0.0
+VIKASECO,Other,0.0
+VIKASLIFE,Other,0.0
+VIKRAMSOLR,Other,0.0
+VIKRAN,Other,0.0
+VIMTALABS,Other,0.0
+VINATIORGA,Other,0.0
+VINCOFE,Other,0.0
+VINDHYATEL,Other,0.0
+VINEETLAB,Other,0.0
+VINNY,Other,0.0
+VINYLINDIA,Other,0.0
+VIPCLOTHNG,Other,0.0
+VIPIND,Other,0.0
+VIPULLTD,Other,0.0
+VIRINCHI,Other,0.0
+VISAKAIND,Other,0.0
+VISASTEEL,Other,0.0
+VISHNU,Other,0.0
+VISHWARAJ,Other,0.0
+VITAL,Other,0.0
+VIVIDHA,Other,0.0
+VIVIMEDLAB,Other,0.0
+VIYASH,Other,0.0
+VLEGOV,Other,0.0
+VLSFINANCE,Other,0.0
+VMART,Other,0.0
+VMM,Other,0.0
+VMSTMT,Other,0.0
+VOLTAMP,Other,0.0
+VOLTAS,Other,0.0
+VPRPL,Other,0.0
+VRAJ,Other,0.0
+VRLLOG,Other,0.0
+VSSL,Other,0.0
+VSTIND,Other,0.0
+VSTL,Other,0.0
+VSTTILLERS,Other,0.0
+VTL,Other,0.0
+WAAREEENER,Other,0.0
+WAAREEINDO,Other,0.0
+WAAREERTL,Other,0.0
+WABAG,Other,0.0
+WAKEFIT,Other,0.0
+WALCHANNAG,Other,0.0
+WANBURY,Other,0.0
+WCIL,Other,0.0
+WEALTH,Other,0.0
+WEBELSOLAR,Other,0.0
+WEIZMANIND,Other,0.0
+WEL,Other,0.0
+WELCORP,Other,0.0
+WELENT,Other,0.0
+WELINV,Other,0.0
+WELSPUNLIV,Other,0.0
+WENDT,Other,0.0
+WESTLIFE,Other,0.0
+WEWIN,Other,0.0
+WEWORK,Other,0.0
+WHEELS,Other,0.0
+WHIRLPOOL,Other,0.0
+WILLAMAGOR,Other,0.0
+WINDLAS,Other,0.0
+WINDMACHIN,Other,0.0
+WINSOME,Other,0.0
+WIPL,Other,0.0
+WIPRO,Other,0.0
+WOCKPHARMA,Other,0.0
+WONDERLA,Other,0.0
+WORTHPERI,Other,0.0
+WSI,Other,0.0
+WSTCSTPAPR,Other,0.0
+XCHANGING,Other,0.0
+XELPMOC,Other,0.0
+XPROINDIA,Other,0.0
+XTGLOBAL,Other,0.0
+YASHO,Other,0.0
+YATHARTH,Other,0.0
+YATRA,Other,0.0
+YESBANK,Other,0.0
+YUKEN,Other,0.0
+ZAGGLE,Other,0.0
+ZEEL,Other,0.0
+ZEELEARN,Other,0.0
+ZEEMEDIA,Other,0.0
+ZENITHEXPO,Other,0.0
+ZENITHSTL,Other,0.0
+ZENSARTECH,Other,0.0
+ZENTEC,Other,0.0
+ZFCVINDIA,Other,0.0
+ZIMLAB,Other,0.0
+ZODIAC,Other,0.0
+ZODIACLOTH,Other,0.0
+ZOTA,Other,0.0
+ZUARI,Other,0.0
+ZUARIIND,Other,0.0
+ZYDUSLIFE,Other,0.0
+ZYDUSWELL,Other,0.0
